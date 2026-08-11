@@ -1,0 +1,201 @@
+[
+  {
+    "tc_id": "TC-DT-001",
+    "title": "Valid authenticated user views order history (nominal path)",
+    "user_email": "fr11_user_pending@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "order_status_under_test": "pending",
+    "expected_badge_text": "Chờ xác nhận",
+    "expected_cancel_button": true,
+    "expected_empty_state": false,
+    "description": "Logged-in user with pending order sees table row with 'Chờ xác nhận' badge and cancel button."
+  },
+  {
+    "tc_id": "TC-DT-002",
+    "title": "User with zero orders sees empty state",
+    "user_email": "fr11_user_0orders@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "expected_empty_message": "Bạn chưa có đơn hàng nào.",
+    "expected_empty_state": true,
+    "description": "User with 0 orders sees empty state text instead of table."
+  },
+  {
+    "tc_id": "TC-DT-003",
+    "title": "Unauthenticated user cannot access order history (missing token)",
+    "user_email": null,
+    "auth_state": "unauthenticated",
+    "expected_page_action": "redirect_login_or_prompt",
+    "description": "Navigating to order history without login displays prompt or redirects to login."
+  },
+  {
+    "tc_id": "TC-DT-004",
+    "title": "Expired or invalid token cannot access order history",
+    "user_email": null,
+    "auth_state": "invalid_token",
+    "token_value": "invalid.jwt.token",
+    "expected_api_status": 401,
+    "description": "Sending request with invalid JWT returns 401 Unauthorized."
+  },
+  {
+    "tc_id": "TC-DT-005",
+    "title": "Order with status 'confirmed' shows cancel button and correct label",
+    "user_email": "fr11_user_confirmed@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "order_status_under_test": "confirmed",
+    "expected_badge_text": "Đã xác nhận",
+    "expected_cancel_button": true,
+    "expected_empty_state": false,
+    "description": "Order with 'confirmed' status displays 'Đã xác nhận' and cancel button."
+  },
+  {
+    "tc_id": "TC-DT-006",
+    "title": "Order with status 'shipping' shows cancel button (ambiguous)",
+    "user_email": "fr11_user_shipping@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "order_status_under_test": "shipping",
+    "expected_badge_text": "Đang giao",
+    "expected_cancel_button": true,
+    "expected_empty_state": false,
+    "description": "Order with 'shipping' status displays 'Đang giao' badge and cancel button per UI logic."
+  },
+  {
+    "tc_id": "TC-DT-007",
+    "title": "Order with status 'delivered' hides cancel button",
+    "user_email": "fr11_user_delivered@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "order_status_under_test": "delivered",
+    "expected_badge_text": "Đã giao",
+    "expected_cancel_button": false,
+    "expected_empty_state": false,
+    "description": "Order with 'delivered' status displays 'Đã giao' and hides cancel button."
+  },
+  {
+    "tc_id": "TC-DT-008",
+    "title": "Order with status 'canceled' hides cancel button and shows 'Đã hủy'",
+    "user_email": "fr11_user_canceled@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "order_status_under_test": "canceled",
+    "expected_badge_text": "Đã hủy",
+    "expected_cancel_button": false,
+    "expected_empty_state": false,
+    "description": "Order with 'canceled' status displays 'Đã hủy' and hides cancel button."
+  },
+  {
+    "tc_id": "TC-DT-009",
+    "title": "Successfully cancel a cancellable order (pending)",
+    "user_email": "fr11_user_cancel_action@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "order_status_under_test": "pending",
+    "action": "click_cancel",
+    "expected_alert": "Hủy đơn thành công!",
+    "expected_post_status_badge": "Đã hủy",
+    "expected_post_cancel_button": false,
+    "description": "Clicking cancel on a pending order cancels it and updates status badge to 'Đã hủy'."
+  },
+  {
+    "tc_id": "TC-DT-010",
+    "title": "Attempt to cancel a 'delivered' order via API (invalid action)",
+    "user_email": "fr11_user_delivered@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "order_status_under_test": "delivered",
+    "action": "api_cancel_request",
+    "expected_api_status": 400,
+    "expected_api_error": "Cannot cancel this order.",
+    "description": "Direct API PUT request to cancel a delivered order returns error."
+  },
+  {
+    "tc_id": "TC-DT-011",
+    "title": "Order list with > 10 orders (pagination boundary)",
+    "user_email": "fr11_user_12orders@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "seeded_order_count": 12,
+    "expected_max_rows_displayed": 10,
+    "description": "User with 12 orders tests pagination boundary limit (expected 10 rows)."
+  },
+  {
+    "tc_id": "TC-DT-012",
+    "title": "Order with unknown/invalid status value",
+    "excluded": true,
+    "user_email": "fr11_user_pending@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "order_status_under_test": "processing",
+    "expected_badge_text": "PROCESSING",
+    "description": "Order with non-standard status string displays raw uppercase value (EXCLUDED from HW04 automation execution)."
+  },
+  {
+    "tc_id": "TC-BVA-001",
+    "title": "Order count boundary: Minimum (0 orders)",
+    "user_email": "fr11_user_0orders@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "target_order_count": 0,
+    "expected_empty_state": true,
+    "expected_row_count": 0,
+    "description": "Boundary test - 0 orders."
+  },
+  {
+    "tc_id": "TC-BVA-002",
+    "title": "Order count boundary: Minimum + 1 (1 order)",
+    "user_email": "fr11_user_1order@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "target_order_count": 1,
+    "expected_empty_state": false,
+    "expected_row_count": 1,
+    "description": "Boundary test - exactly 1 order."
+  },
+  {
+    "tc_id": "TC-BVA-003",
+    "title": "Order count boundary: Nominal (5 orders)",
+    "user_email": "fr11_user_5orders@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "target_order_count": 5,
+    "expected_empty_state": false,
+    "expected_row_count": 5,
+    "description": "Boundary test - 5 orders."
+  },
+  {
+    "tc_id": "TC-BVA-004",
+    "title": "Order count boundary: Maximum - 1 (9 orders)",
+    "user_email": "fr11_user_9orders@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "target_order_count": 9,
+    "expected_empty_state": false,
+    "expected_row_count": 9,
+    "description": "Boundary test - 9 orders."
+  },
+  {
+    "tc_id": "TC-BVA-005",
+    "title": "Order count boundary: Maximum (10 orders)",
+    "user_email": "fr11_user_10orders@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "target_order_count": 10,
+    "expected_empty_state": false,
+    "expected_row_count": 10,
+    "description": "Boundary test - 10 orders."
+  },
+  {
+    "tc_id": "TC-BVA-006",
+    "title": "Order count boundary: Maximum + 1 (11 orders)",
+    "user_email": "fr11_user_11orders@eshop.com",
+    "user_password": "Test1234!",
+    "auth_state": "authenticated",
+    "target_order_count": 11,
+    "expected_empty_state": false,
+    "expected_row_count": 10,
+    "description": "Boundary test - 11 orders (truncation limit expected at 10)."
+  }
+]

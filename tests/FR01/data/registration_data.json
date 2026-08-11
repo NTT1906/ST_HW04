@@ -1,0 +1,159 @@
+[
+  {
+    "tc_id": "TC001",
+    "title": "Successful registration with all valid inputs",
+    "name": "Nguyen Van A",
+    "email": "testuser01@example.com",
+    "password": "Password1! ",
+    "expected_status": "success",
+    "description": "Happy path - valid name, email, and password containing uppercase, lowercase, digit, special char, and space for UI client validation."
+  },
+  {
+    "tc_id": "TC002",
+    "title": "Registration fails when name is empty",
+    "name": "",
+    "email": "testuser02@example.com",
+    "password": "Password1! ",
+    "expected_status": "error",
+    "expected_error": "name_required",
+    "description": "Empty name field with valid email and password."
+  },
+  {
+    "tc_id": "TC003",
+    "title": "Registration fails when email is empty",
+    "name": "Nguyen Van B",
+    "email": "",
+    "password": "Password1! ",
+    "expected_status": "error",
+    "expected_error": "email_required",
+    "description": "Empty email field with valid name and password."
+  },
+  {
+    "tc_id": "TC004",
+    "title": "Registration fails when email has no @ symbol",
+    "name": "Nguyen Van C",
+    "email": "invalidemail",
+    "password": "Password1! ",
+    "expected_status": "error",
+    "expected_error": "invalid_email",
+    "description": "Email missing @ symbol."
+  },
+  {
+    "tc_id": "TC005",
+    "title": "Registration fails when email has no domain after @",
+    "name": "Nguyen Van D",
+    "email": "user@",
+    "password": "Password1! ",
+    "expected_status": "error",
+    "expected_error": "invalid_email",
+    "description": "Email missing domain portion."
+  },
+  {
+    "tc_id": "TC006",
+    "title": "Registration fails when email has no local part before @",
+    "name": "Nguyen Van E",
+    "email": "@example.com",
+    "password": "Password1! ",
+    "expected_status": "error",
+    "expected_error": "invalid_email",
+    "description": "Email missing local portion."
+  },
+  {
+    "tc_id": "TC007",
+    "title": "Registration fails when email is already registered",
+    "name": "Nguyen Van F",
+    "email": "existing_user@example.com",
+    "password": "Password1! ",
+    "expected_status": "error",
+    "expected_error": "duplicate_email",
+    "description": "Attempting to register with an email that is already present in the system (pre-populated/pre-registered data setup)."
+  },
+  {
+    "tc_id": "TC008",
+    "title": "Registration fails when password is empty",
+    "name": "Nguyen Van G",
+    "email": "testuser08@example.com",
+    "password": "",
+    "expected_status": "error",
+    "expected_error": "password_required",
+    "description": "Empty password field."
+  },
+  {
+    "tc_id": "TC009",
+    "title": "Registration fails when password has fewer than 8 characters",
+    "name": "Nguyen Van H",
+    "email": "testuser09@example.com",
+    "password": "Pass1! ",
+    "expected_status": "error",
+    "expected_error": "password_too_short",
+    "description": "Password with 7 characters (under min 8 length requirement)."
+  },
+  {
+    "tc_id": "TC010",
+    "title": "Registration fails when password has no uppercase letter",
+    "name": "Nguyen Van I",
+    "email": "testuser10@example.com",
+    "password": "password1! ",
+    "expected_status": "error",
+    "expected_error": "password_missing_uppercase",
+    "description": "Password missing uppercase character."
+  },
+  {
+    "tc_id": "TC011",
+    "title": "Registration fails when password has no lowercase letter",
+    "name": "Nguyen Van J",
+    "email": "testuser11@example.com",
+    "password": "PASSWORD1! ",
+    "expected_status": "error",
+    "expected_error": "password_missing_lowercase",
+    "description": "Password missing lowercase character."
+  },
+  {
+    "tc_id": "TC012",
+    "title": "Registration fails when password has no digit",
+    "name": "Nguyen Van K",
+    "email": "testuser12@example.com",
+    "password": "Password!! ",
+    "expected_status": "error",
+    "expected_error": "password_missing_digit",
+    "description": "Password missing digit."
+  },
+  {
+    "tc_id": "TC013",
+    "title": "Registration fails when password has no special character / space",
+    "name": "Nguyen Van L",
+    "email": "testuser13@example.com",
+    "password": "Password123",
+    "expected_status": "error",
+    "expected_error": "password_missing_special",
+    "description": "Password missing special character / required space."
+  },
+  {
+    "tc_id": "BVA-TC001",
+    "title": "Password boundary: Min - 1 (7 characters)",
+    "name": "Nguyen Van BVA1",
+    "email": "bva01@example.com",
+    "password": "Pas1! A",
+    "expected_status": "error",
+    "expected_error": "password_too_short",
+    "description": "Boundary test - password length 7 characters (Min - 1)."
+  },
+  {
+    "tc_id": "BVA-TC002",
+    "title": "Password boundary: Min (8 characters)",
+    "name": "Nguyen Van BVA2",
+    "email": "bva02@example.com",
+    "password": "Pas1! Aa",
+    "expected_status": "success",
+    "description": "Boundary test - password length exactly 8 characters (Min)."
+  },
+  {
+    "tc_id": "BVA-TC003",
+    "title": "Password boundary: Min + 1 (9 characters)",
+    "name": "Nguyen Van BVA3",
+    "email": "bva03@example.com",
+    "password": "Pas1! Aab",
+    "expected_status": "success",
+    "description": "Boundary test - password length 9 characters (Min + 1)."
+  }
+]
