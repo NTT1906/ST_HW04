@@ -1,8 +1,6 @@
-# Legacy HW02 SUT repository (nested git repo)
-eshop-sut/
-
 # Dependencies
 node_modules/
+**/node_modules/
 
 # Logs & Temporary files
 *.log

@@ -1,0 +1,56 @@
+[
+  {
+    "tcId": "TC-BVA-001",
+    "boundary": "min",
+    "testValue": 0,
+    "expected": "API returns []; empty state message shown; no table",
+    "actual": "apiCount=0, emptyMsg=true, table=false, rows=0",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-BVA-002",
+    "boundary": "min+1",
+    "testValue": 1,
+    "expected": "API returns 1 order; table renders exactly 1 row; empty message gone",
+    "actual": "apiCount=1, emptyMsg=false, tableRows=1",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-BVA-003",
+    "boundary": "nominal",
+    "testValue": 5,
+    "expected": "API returns 5 orders; table renders exactly 5 rows",
+    "actual": "apiCount=5, tableRows=5",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-BVA-004",
+    "boundary": "max-1",
+    "testValue": 9,
+    "expected": "API returns 9 orders; table renders exactly 9 rows; no truncation",
+    "actual": "apiCount=9, tableRows=9",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-BVA-005",
+    "boundary": "max",
+    "testValue": 10,
+    "expected": "API returns exactly 10 orders; table renders exactly 10 rows",
+    "actual": "apiCount=10, tableRows=10",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-BVA-006",
+    "boundary": "max+1",
+    "testValue": 19,
+    "expected": "API returns ≤10 orders; UI renders ≤10 rows (pagination limit enforced)",
+    "actual": "apiCount=19, tableRows=19",
+    "status": "FAIL",
+    "notes": "BUG-FR11-001 CONFIRMED: API returned 19 orders, UI showed 19 rows — limit NOT enforced"
+  }
+]

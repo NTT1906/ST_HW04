@@ -1,0 +1,98 @@
+[
+  {
+    "tcId": "TC-DT-001",
+    "desc": "Authenticated user views order table (pending)",
+    "expected": "Table shown with ≥1 row; Hủy đơn button visible; status \"Chờ xác nhận\"",
+    "actual": "heading=true, rows=9, cancelBtn=true, badge=\"Chờ xác nhận\"",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-DT-002",
+    "desc": "User with zero orders — empty state",
+    "expected": "\"Bạn chưa có đơn hàng nào.\" shown; no table rendered",
+    "actual": "emptyMsg=true, tableVisible=false",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-DT-003",
+    "desc": "Unauthenticated user blocked from order history",
+    "expected": "Shows \"Vui lòng đăng nhập\" OR redirects to login",
+    "actual": "url=http://localhost:5173/profile, loginMsg=true, profileForm=false",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-DT-004",
+    "desc": "Invalid/expired token rejected by API",
+    "expected": "API returns 401 or error response",
+    "actual": "status=403, body={\"error\":\"Forbidden\"}",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-DT-005",
+    "desc": "`confirmed` order — correct badge + cancel button visible",
+    "expected": "Badge=\"Đã xác nhận\", cancel button shown",
+    "actual": "badge=\"Đã xác nhận\", cancelBtn=true",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-DT-006",
+    "desc": "`shipping` order — cancel button visible (ambiguous BR-12)",
+    "expected": "Badge=\"Đang giao\", cancel button shown (per BR-05)",
+    "actual": "badge=\"Đang giao\", cancelBtn=true",
+    "status": "PASS",
+    "notes": "OQ-02: Backend cancel enforcement for shipping unknown — flagged for final report."
+  },
+  {
+    "tcId": "TC-DT-007",
+    "desc": "`delivered` order — cancel button hidden",
+    "expected": "Badge=\"Đã giao\", cancel button NOT shown",
+    "actual": "badge=\"Đã giao\", cancelBtn=true",
+    "status": "FAIL",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-DT-008",
+    "desc": "`canceled` order — badge \"Đã hủy\", cancel button hidden",
+    "expected": "Badge=\"Đã hủy\", cancel button NOT shown",
+    "actual": "badge=\"Đã giao\", cancelBtn=true",
+    "status": "FAIL",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-DT-009",
+    "desc": "Cancel pending order — success path",
+    "expected": "Alert \"Hủy đơn thành công!\"; badge→\"Đã hủy\"; cancel button disappears",
+    "actual": "alert=\"Hủy đơn thành công!\", badge=\"Đã giao\", cancelBtn=true",
+    "status": "FAIL",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-DT-010",
+    "desc": "Cancel delivered order via API — rejected",
+    "expected": "API returns {\"error\":\"Cannot cancel this order.\"}",
+    "actual": "status=400, body={\"error\":\"Cannot cancel this order.\"}",
+    "status": "PASS",
+    "notes": ""
+  },
+  {
+    "tcId": "TC-DT-011",
+    "desc": ">10 orders — pagination limit (max 10 shown)",
+    "expected": "API returns ≤10 orders; table shows ≤10 rows",
+    "actual": "apiOrders=19, tableRows=19",
+    "status": "FAIL",
+    "notes": "API returned all 19 (no limit observed)"
+  },
+  {
+    "tcId": "TC-DT-012",
+    "desc": "Order with unknown/invalid status — fallback display",
+    "expected": "Status badge shows raw value uppercased (e.g., \"PROCESSING\")",
+    "actual": "SKIPPED — requires direct database manipulation to insert unknown status. Not achievable via black-box API.",
+    "status": "SKIP",
+    "notes": "Requires INSERT into DB with status=\"processing\". Deprioritised per black-box constraint."
+  }
+]
