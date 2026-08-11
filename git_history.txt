@@ -1,0 +1,436 @@
+﻿commit a864b63b7ca1a8eb0dfbef558eff79a3f625c2f0
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:47:55 2026 +0700
+
+    docs: add git_history.txt containing full repository commit log
+
+ git_history.txt | 436 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 436 insertions(+)
+
+commit 3ddf14510cc61a419e1c1d7d29af6c9e30a9f610
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:42:22 2026 +0700
+
+    feat: add legacy eshop-sut reference codebase and artifacts
+
+ .gitignore                                         |    4 +-
+ eshop-sut/.gitignore                               |    2 +
+ eshop-sut/AI_AUDIT_AND_CRITIQUE.md                 |   93 +
+ eshop-sut/MAIN_REPORT.md                           |  309 +
+ eshop-sut/api_specification.md                     |  214 +
+ eshop-sut/backend/database.js                      |  119 +
+ eshop-sut/backend/package-lock.json                | 1663 ++++
+ eshop-sut/backend/package.json                     |   20 +
+ eshop-sut/backend/server.js                        |  572 ++
+ eshop-sut/backend/test_profile.js                  |    8 +
+ eshop-sut/bugs/FR01/BUG-001.md                     |  113 +
+ eshop-sut/bugs/FR01/BUG-002.md                     |  114 +
+ eshop-sut/bugs/FR01/BUG-003.md                     |  101 +
+ eshop-sut/bugs/FR01/BUG-01-second-pass.md          |   35 +
+ .../bugs/FR01/screenshots/FR01-ISSUE-BUG-001.png   |  Bin 0 -> 78686 bytes
+ .../bugs/FR01/screenshots/FR01-ISSUE-BUG-002.png   |  Bin 0 -> 71228 bytes
+ .../bugs/FR01/screenshots/FR01-ISSUE-BUG-003.png   |  Bin 0 -> 62042 bytes
+ eshop-sut/bugs/FR01/screenshots/TC001-after.png    |  Bin 0 -> 29941 bytes
+ eshop-sut/bugs/FR01/screenshots/TC004-after.png    |  Bin 0 -> 29230 bytes
+ eshop-sut/bugs/FR01/screenshots/TC005-after.png    |  Bin 0 -> 29125 bytes
+ eshop-sut/bugs/FR01/screenshots/TC006-after.png    |  Bin 0 -> 29450 bytes
+ eshop-sut/bugs/FR01/screenshots/TC007-after.png    |  Bin 0 -> 29860 bytes
+ eshop-sut/bugs/FR11/BUG-001.md                     |  140 +
+ .../FR11/screenshots/FR11-ISSUE-BUG-001_P1.png     |  Bin 0 -> 68876 bytes
+ .../FR11/screenshots/FR11-ISSUE-BUG-001_P2.png     |  Bin 0 -> 23598 bytes
+ eshop-sut/bugs/FR14/BUG-001.md                     |  125 +
+ eshop-sut/bugs/FR14/BUG-002.md                     |  106 +
+ eshop-sut/bugs/FR14/BUG-003.md                     |  106 +
+ eshop-sut/bugs/FR14/BUG-004.md                     |  107 +
+ eshop-sut/bugs/FR14/BUG-005.md                     |   96 +
+ .../bugs/FR14/screenshots/FR14-ISSUE-BUG-001.png   |  Bin 0 -> 64438 bytes
+ .../bugs/FR14/screenshots/FR14-ISSUE-BUG-002.png   |  Bin 0 -> 63515 bytes
+ .../bugs/FR14/screenshots/FR14-ISSUE-BUG-003.png   |  Bin 0 -> 70080 bytes
+ .../bugs/FR14/screenshots/FR14-ISSUE-BUG-004.png   |  Bin 0 -> 70654 bytes
+ .../bugs/FR14/screenshots/FR14-ISSUE-BUG-005.png   |  Bin 0 -> 62511 bytes
+ eshop-sut/bugs/FR20/BUG-001.md                     |  116 +
+ eshop-sut/bugs/FR20/BUG-002.md                     |  104 +
+ .../bugs/FR20/screenshots/BUG-001-decimal.png      |  Bin 0 -> 102303 bytes
+ .../bugs/FR20/screenshots/BUG-001-negative.png     |  Bin 0 -> 101632 bytes
+ .../bugs/FR20/screenshots/BUG-001-nonnumeric.png   |  Bin 0 -> 100694 bytes
+ eshop-sut/bugs/FR20/screenshots/BUG-001-zero.png   |  Bin 0 -> 101683 bytes
+ .../bugs/FR20/screenshots/BUG-002-overflow.png     |  Bin 0 -> 101744 bytes
+ .../FR20/screenshots/FR20-ISSUE-BUG-001_P1.png     |  Bin 0 -> 75486 bytes
+ .../FR20/screenshots/FR20-ISSUE-BUG-001_P2.png     |  Bin 0 -> 48268 bytes
+ .../FR20/screenshots/FR20-ISSUE-BUG-001_P3.png     |  Bin 0 -> 45203 bytes
+ .../FR20/screenshots/FR20-ISSUE-BUG-001_P4.png     |  Bin 0 -> 32337 bytes
+ .../FR20/screenshots/FR20-ISSUE-BUG-002_P1.png     |  Bin 0 -> 76114 bytes
+ .../FR20/screenshots/FR20-ISSUE-BUG-002_P2.png     |  Bin 0 -> 40365 bytes
+ eshop-sut/frontend-admin/.gitignore                |   24 +
+ eshop-sut/frontend-admin/README.md                 |   16 +
+ eshop-sut/frontend-admin/eslint.config.js          |   21 +
+ eshop-sut/frontend-admin/index.html                |   13 +
+ eshop-sut/frontend-admin/package-lock.json         | 3697 +++++++++
+ eshop-sut/frontend-admin/package.json              |   32 +
+ eshop-sut/frontend-admin/postcss.config.js         |    6 +
+ eshop-sut/frontend-admin/public/favicon.svg        |    1 +
+ eshop-sut/frontend-admin/public/icons.svg          |   24 +
+ eshop-sut/frontend-admin/src/App.css               |  184 +
+ eshop-sut/frontend-admin/src/App.jsx               |  922 ++
+ eshop-sut/frontend-admin/src/assets/hero.png       |  Bin 0 -> 13057 bytes
+ eshop-sut/frontend-admin/src/assets/react.svg      |    1 +
+ eshop-sut/frontend-admin/src/assets/vite.svg       |    1 +
+ eshop-sut/frontend-admin/src/index.css             |    8 +
+ eshop-sut/frontend-admin/src/main.jsx              |   10 +
+ eshop-sut/frontend-admin/tailwind.config.js        |   11 +
+ eshop-sut/frontend-admin/vite.config.js            |   11 +
+ eshop-sut/frontend-mobile/.gitignore               |   41 +
+ eshop-sut/frontend-mobile/App.js                   | 1300 +++
+ eshop-sut/frontend-mobile/app.json                 |   29 +
+ eshop-sut/frontend-mobile/assets/adaptive-icon.png |  Bin 0 -> 17547 bytes
+ eshop-sut/frontend-mobile/assets/favicon.png       |  Bin 0 -> 1466 bytes
+ eshop-sut/frontend-mobile/assets/icon.png          |  Bin 0 -> 22380 bytes
+ eshop-sut/frontend-mobile/assets/splash-icon.png   |  Bin 0 -> 17547 bytes
+ eshop-sut/frontend-mobile/index.js                 |    8 +
+ eshop-sut/frontend-mobile/package-lock.json        | 8773 ++++++++++++++++++++
+ eshop-sut/frontend-mobile/package.json             |   18 +
+ eshop-sut/frontend-web/.gitignore                  |   24 +
+ eshop-sut/frontend-web/README.md                   |   16 +
+ eshop-sut/frontend-web/eslint.config.js            |   21 +
+ eshop-sut/frontend-web/index.html                  |   13 +
+ eshop-sut/frontend-web/package-lock.json           | 3681 ++++++++
+ eshop-sut/frontend-web/package.json                |   32 +
+ eshop-sut/frontend-web/postcss.config.js           |    6 +
+ eshop-sut/frontend-web/public/favicon.svg          |    1 +
+ eshop-sut/frontend-web/public/icons.svg            |   24 +
+ eshop-sut/frontend-web/src/App.css                 |  184 +
+ eshop-sut/frontend-web/src/App.jsx                 |   71 +
+ eshop-sut/frontend-web/src/assets/hero.png         |  Bin 0 -> 13057 bytes
+ eshop-sut/frontend-web/src/assets/react.svg        |    1 +
+ eshop-sut/frontend-web/src/assets/vite.svg         |    1 +
+ eshop-sut/frontend-web/src/context/AuthContext.jsx |   50 +
+ eshop-sut/frontend-web/src/context/CartContext.jsx |   36 +
+ eshop-sut/frontend-web/src/index.css               |   14 +
+ eshop-sut/frontend-web/src/main.jsx                |   10 +
+ eshop-sut/frontend-web/src/pages/Cart.jsx          |   79 +
+ eshop-sut/frontend-web/src/pages/Checkout.jsx      |  151 +
+ .../frontend-web/src/pages/ForgotPassword.jsx      |  100 +
+ eshop-sut/frontend-web/src/pages/Home.jsx          |  116 +
+ eshop-sut/frontend-web/src/pages/Login.jsx         |   69 +
+ eshop-sut/frontend-web/src/pages/ProductDetail.jsx |   73 +
+ eshop-sut/frontend-web/src/pages/Profile.jsx       |  217 +
+ eshop-sut/frontend-web/src/pages/Register.jsx      |   83 +
+ eshop-sut/frontend-web/tailwind.config.js          |   11 +
+ eshop-sut/frontend-web/vite.config.js              |    7 +
+ eshop-sut/git_commit_log.txt                       |   13 +
+ eshop-sut/playwright/env_check.js                  |   24 +
+ eshop-sut/playwright/env_check_fr11.js             |   33 +
+ eshop-sut/playwright/env_check_fr14.js             |   80 +
+ eshop-sut/playwright/exec_fr01_bva.js              |   71 +
+ eshop-sut/playwright/exec_fr01_dt.js               |   98 +
+ eshop-sut/playwright/exec_fr11_bva.js              |  241 +
+ eshop-sut/playwright/exec_fr11_dt.js               |  386 +
+ eshop-sut/playwright/exec_fr14_dt.js               |  439 +
+ eshop-sut/playwright/generate_raw_audit_fr14.js    |   48 +
+ eshop-sut/playwright/inspect_fields.js             |   58 +
+ eshop-sut/playwright/package-lock.json             |   75 +
+ eshop-sut/playwright/package.json                  |    5 +
+ eshop-sut/run_servers.sh                           |   15 +
+ eshop-sut/tests/FR01/AUDIT-01-log.md               |   82 +
+ eshop-sut/tests/FR01/BVA-01-boundary-analysis.md   |  112 +
+ .../tests/FR01/DT-01-feature-understanding.md      |  108 +
+ .../tests/FR01/DT-02-domain-identification.md      |  116 +
+ eshop-sut/tests/FR01/DT-03-domain-partitioning.md  |   88 +
+ eshop-sut/tests/FR01/DT-04-test-cases.md           |  270 +
+ eshop-sut/tests/FR01/ENV-01.md                     |   50 +
+ eshop-sut/tests/FR01/GAP-01-gap-analysis.md        |   64 +
+ eshop-sut/tests/FR01/RAW_AUDIT_FR01.md             | 2393 ++++++
+ eshop-sut/tests/FR01/REPORT-FR01.md                |  248 +
+ eshop-sut/tests/FR01/REPORT-FR01.pdf               |  Bin 0 -> 366039 bytes
+ eshop-sut/tests/FR01/REVIEW-01-of-DT-01.md         |   37 +
+ eshop-sut/tests/FR01/REVIEW-01-of-DT-02.md         |   37 +
+ eshop-sut/tests/FR01/REVIEW-01-of-DT-03.md         |   25 +
+ eshop-sut/tests/FR01/bva-execution-results.json    |   35 +
+ eshop-sut/tests/FR01/execution-bva.md              |   66 +
+ eshop-sut/tests/FR01/execution-results.json        |  145 +
+ eshop-sut/tests/FR01/execution.md                  |   83 +
+ .../tests/FR01/screenshots/BVA-TC001-after.png     |  Bin 0 -> 29972 bytes
+ .../tests/FR01/screenshots/BVA-TC001-before.png    |  Bin 0 -> 24523 bytes
+ .../tests/FR01/screenshots/BVA-TC002-after.png     |  Bin 0 -> 30023 bytes
+ .../tests/FR01/screenshots/BVA-TC002-before.png    |  Bin 0 -> 24577 bytes
+ .../tests/FR01/screenshots/BVA-TC003-after.png     |  Bin 0 -> 30060 bytes
+ .../tests/FR01/screenshots/BVA-TC003-before.png    |  Bin 0 -> 24612 bytes
+ eshop-sut/tests/FR01/screenshots/ENV-homepage.png  |  Bin 0 -> 58012 bytes
+ .../tests/FR01/screenshots/ENV-register-page.png   |  Bin 0 -> 21337 bytes
+ eshop-sut/tests/FR01/screenshots/TC001-after.png   |  Bin 0 -> 29941 bytes
+ eshop-sut/tests/FR01/screenshots/TC001-before.png  |  Bin 0 -> 24485 bytes
+ eshop-sut/tests/FR01/screenshots/TC002-after.png   |  Bin 0 -> 25847 bytes
+ eshop-sut/tests/FR01/screenshots/TC002-before.png  |  Bin 0 -> 23650 bytes
+ eshop-sut/tests/FR01/screenshots/TC003-after.png   |  Bin 0 -> 24765 bytes
+ eshop-sut/tests/FR01/screenshots/TC003-before.png  |  Bin 0 -> 23130 bytes
+ eshop-sut/tests/FR01/screenshots/TC004-after.png   |  Bin 0 -> 29230 bytes
+ eshop-sut/tests/FR01/screenshots/TC004-before.png  |  Bin 0 -> 23772 bytes
+ eshop-sut/tests/FR01/screenshots/TC005-after.png   |  Bin 0 -> 29125 bytes
+ eshop-sut/tests/FR01/screenshots/TC005-before.png  |  Bin 0 -> 23657 bytes
+ eshop-sut/tests/FR01/screenshots/TC006-after.png   |  Bin 0 -> 29450 bytes
+ eshop-sut/tests/FR01/screenshots/TC006-before.png  |  Bin 0 -> 23993 bytes
+ eshop-sut/tests/FR01/screenshots/TC007-after.png   |  Bin 0 -> 29860 bytes
+ eshop-sut/tests/FR01/screenshots/TC007-before.png  |  Bin 0 -> 24403 bytes
+ eshop-sut/tests/FR01/screenshots/TC008-after.png   |  Bin 0 -> 25698 bytes
+ eshop-sut/tests/FR01/screenshots/TC008-before.png  |  Bin 0 -> 24400 bytes
+ eshop-sut/tests/FR01/screenshots/TC009-after.png   |  Bin 0 -> 29896 bytes
+ eshop-sut/tests/FR01/screenshots/TC009-before.png  |  Bin 0 -> 24443 bytes
+ eshop-sut/tests/FR01/screenshots/TC010-after.png   |  Bin 0 -> 29831 bytes
+ eshop-sut/tests/FR01/screenshots/TC010-before.png  |  Bin 0 -> 24373 bytes
+ eshop-sut/tests/FR01/screenshots/TC011-after.png   |  Bin 0 -> 29791 bytes
+ eshop-sut/tests/FR01/screenshots/TC011-before.png  |  Bin 0 -> 24335 bytes
+ eshop-sut/tests/FR01/screenshots/TC012-after.png   |  Bin 0 -> 29922 bytes
+ eshop-sut/tests/FR01/screenshots/TC012-before.png  |  Bin 0 -> 24466 bytes
+ eshop-sut/tests/FR01/screenshots/TC013-after.png   |  Bin 0 -> 29834 bytes
+ eshop-sut/tests/FR01/screenshots/TC013-before.png  |  Bin 0 -> 24384 bytes
+ eshop-sut/tests/FR11/AUDIT-01-log.md               |   81 +
+ eshop-sut/tests/FR11/BVA-01-boundary-analysis.md   |  147 +
+ .../tests/FR11/DT-01-feature-understanding.md      |  127 +
+ .../tests/FR11/DT-02-domain-identification.md      |  127 +
+ eshop-sut/tests/FR11/DT-03-domain-partitioning.md  |  101 +
+ eshop-sut/tests/FR11/DT-04-test-cases.md           |  227 +
+ eshop-sut/tests/FR11/ENV-01-environment-report.md  |  110 +
+ eshop-sut/tests/FR11/GAP-01-gap-analysis.md        |   55 +
+ eshop-sut/tests/FR11/RAW_AUDIT_FR11.md             | 2756 ++++++
+ eshop-sut/tests/FR11/REPORT-FR11.md                |  177 +
+ eshop-sut/tests/FR11/REPORT-FR11.pdf               |  Bin 0 -> 323110 bytes
+ eshop-sut/tests/FR11/REVIEW-01-of-DT-01.md         |   50 +
+ eshop-sut/tests/FR11/REVIEW-01-of-DT-02.md         |   43 +
+ eshop-sut/tests/FR11/REVIEW-01-of-DT-03.md         |   33 +
+ eshop-sut/tests/FR11/execution-bva-results.json    |   56 +
+ eshop-sut/tests/FR11/execution-bva.md              |   41 +
+ eshop-sut/tests/FR11/execution-results.json        |   98 +
+ eshop-sut/tests/FR11/execution.md                  |  155 +
+ .../tests/FR11/screenshots/ENV-01-after-login.png  |  Bin 0 -> 26009 bytes
+ .../tests/FR11/screenshots/ENV-01-login-page.png   |  Bin 0 -> 18011 bytes
+ .../tests/FR11/screenshots/ENV-01-profile-page.png |  Bin 0 -> 32279 bytes
+ eshop-sut/tests/FR11/screenshots/TC-BVA-001.png    |  Bin 0 -> 29446 bytes
+ eshop-sut/tests/FR11/screenshots/TC-BVA-002.png    |  Bin 0 -> 33512 bytes
+ eshop-sut/tests/FR11/screenshots/TC-BVA-003.png    |  Bin 0 -> 46719 bytes
+ eshop-sut/tests/FR11/screenshots/TC-BVA-004.png    |  Bin 0 -> 60485 bytes
+ eshop-sut/tests/FR11/screenshots/TC-BVA-005.png    |  Bin 0 -> 63804 bytes
+ eshop-sut/tests/FR11/screenshots/TC-BVA-006.png    |  Bin 0 -> 90681 bytes
+ eshop-sut/tests/FR11/screenshots/TC-DT-001.png     |  Bin 0 -> 56842 bytes
+ eshop-sut/tests/FR11/screenshots/TC-DT-002.png     |  Bin 0 -> 28407 bytes
+ eshop-sut/tests/FR11/screenshots/TC-DT-003.png     |  Bin 0 -> 11503 bytes
+ eshop-sut/tests/FR11/screenshots/TC-DT-005.png     |  Bin 0 -> 56844 bytes
+ eshop-sut/tests/FR11/screenshots/TC-DT-006.png     |  Bin 0 -> 56671 bytes
+ eshop-sut/tests/FR11/screenshots/TC-DT-007.png     |  Bin 0 -> 55813 bytes
+ eshop-sut/tests/FR11/screenshots/TC-DT-008.png     |  Bin 0 -> 55813 bytes
+ .../tests/FR11/screenshots/TC-DT-009-after.png     |  Bin 0 -> 54800 bytes
+ .../tests/FR11/screenshots/TC-DT-009-before.png    |  Bin 0 -> 55813 bytes
+ eshop-sut/tests/FR11/screenshots/TC-DT-011.png     |  Bin 0 -> 90681 bytes
+ eshop-sut/tests/FR14/AUDIT-01-log.md               |   82 +
+ eshop-sut/tests/FR14/BVA-01-boundary-analysis.md   |   32 +
+ .../tests/FR14/DT-01-feature-understanding.md      |  112 +
+ .../tests/FR14/DT-02-domain-identification.md      |  109 +
+ eshop-sut/tests/FR14/DT-03-domain-partitioning.md  |   86 +
+ eshop-sut/tests/FR14/DT-04-test-cases.md           |  235 +
+ eshop-sut/tests/FR14/ENV-01-environment-report.md  |   93 +
+ eshop-sut/tests/FR14/GAP-01-gap-analysis.md        |   55 +
+ eshop-sut/tests/FR14/RAW_AUDIT_FR14.md             | 2578 ++++++
+ eshop-sut/tests/FR14/REPORT-FR14.md                |  178 +
+ eshop-sut/tests/FR14/REPORT-FR14.pdf               |  Bin 0 -> 293239 bytes
+ eshop-sut/tests/FR14/REVIEW-01-of-DT-01.md         |   47 +
+ eshop-sut/tests/FR14/REVIEW-01-of-DT-02.md         |   44 +
+ eshop-sut/tests/FR14/REVIEW-01-of-DT-03.md         |   33 +
+ eshop-sut/tests/FR14/execution-bva.md              |   20 +
+ eshop-sut/tests/FR14/execution-results.json        |   93 +
+ eshop-sut/tests/FR14/execution.md                  |   83 +
+ .../FR14/screenshots/ENV-01-categories-page.png    |  Bin 0 -> 24726 bytes
+ .../tests/FR14/screenshots/ENV-01-dashboard.png    |  Bin 0 -> 21769 bytes
+ .../tests/FR14/screenshots/ENV-01-login-page.png   |  Bin 0 -> 8772 bytes
+ .../tests/FR14/screenshots/TC-DT-001-after.png     |  Bin 0 -> 23410 bytes
+ .../tests/FR14/screenshots/TC-DT-002-after.png     |  Bin 0 -> 24905 bytes
+ .../tests/FR14/screenshots/TC-DT-003-after.png     |  Bin 0 -> 25791 bytes
+ .../tests/FR14/screenshots/TC-DT-004-after.png     |  Bin 0 -> 27266 bytes
+ .../tests/FR14/screenshots/TC-DT-005-after.png     |  Bin 0 -> 24507 bytes
+ .../tests/FR14/screenshots/TC-DT-006-after.png     |  Bin 0 -> 26628 bytes
+ .../tests/FR14/screenshots/TC-DT-007-after.png     |  Bin 0 -> 19778 bytes
+ .../tests/FR14/screenshots/TC-DT-010-after.png     |  Bin 0 -> 8772 bytes
+ .../tests/FR14/screenshots/TC-DT-013-after.png     |  Bin 0 -> 25028 bytes
+ eshop-sut/tests/FR20/AUDIT-01-log.md               |   78 +
+ eshop-sut/tests/FR20/BVA-01-boundary-analysis.md   |  110 +
+ .../tests/FR20/DT-01-feature-understanding.md      |   98 +
+ .../tests/FR20/DT-02-domain-identification.md      |   80 +
+ eshop-sut/tests/FR20/DT-03-domain-partitioning.md  |   61 +
+ eshop-sut/tests/FR20/DT-04-test-cases.md           |  151 +
+ eshop-sut/tests/FR20/ENV-01-environment-report.md  |   80 +
+ eshop-sut/tests/FR20/GAP-01-gap-analysis.md        |   55 +
+ eshop-sut/tests/FR20/RAW_AUDIT_FR20.md             | 1491 ++++
+ eshop-sut/tests/FR20/REPORT-FR20.md                |  155 +
+ eshop-sut/tests/FR20/REPORT-FR20.pdf               |  Bin 0 -> 368222 bytes
+ eshop-sut/tests/FR20/REVIEW-01-of-DT-01.md         |   44 +
+ eshop-sut/tests/FR20/REVIEW-01-of-DT-02.md         |   43 +
+ eshop-sut/tests/FR20/REVIEW-01-of-DT-03.md         |   33 +
+ eshop-sut/tests/FR20/alert_screen.png              |  Bin 0 -> 100813 bytes
+ eshop-sut/tests/FR20/bva-execution-results.json    |   30 +
+ eshop-sut/tests/FR20/execution-bva.md              |   51 +
+ eshop-sut/tests/FR20/execution-results.json        |   58 +
+ eshop-sut/tests/FR20/execution.md                  |   71 +
+ eshop-sut/tests/FR20/home_screen.png               |  Bin 0 -> 140124 bytes
+ .../FR20/screenshots/ENV-01-product-screen.png     |  Bin 0 -> 100423 bytes
+ eshop-sut/tests/FR20/screenshots/TC001-after.png   |  Bin 0 -> 101013 bytes
+ eshop-sut/tests/FR20/screenshots/TC001-before.png  |  Bin 0 -> 100470 bytes
+ eshop-sut/tests/FR20/screenshots/TC002-after.png   |  Bin 0 -> 93447 bytes
+ eshop-sut/tests/FR20/screenshots/TC002-before.png  |  Bin 0 -> 110401 bytes
+ eshop-sut/tests/FR20/screenshots/TC004-after.png   |  Bin 0 -> 101683 bytes
+ eshop-sut/tests/FR20/screenshots/TC005-after.png   |  Bin 0 -> 101632 bytes
+ eshop-sut/tests/FR20/screenshots/TC006-after.png   |  Bin 0 -> 102303 bytes
+ eshop-sut/tests/FR20/screenshots/TC007-after.png   |  Bin 0 -> 100694 bytes
+ eshop-sut/tests/FR20/screenshots/TC008-after.png   |  Bin 0 -> 101744 bytes
+ .../tests/FR20/screenshots/TCBVA004-after.png      |  Bin 0 -> 101001 bytes
+ eshop-sut/tests/FR20/scripts/exec_fr20.ps1         |  117 +
+ eshop-sut/tests/FR20/tap_test.png                  |  Bin 0 -> 88827 bytes
+ 269 files changed, 41121 insertions(+), 3 deletions(-)
+
+commit 7c63a4c6f8f0be075b65cea7c7fc2f8edd5a5426
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:36:19 2026 +0700
+
+    docs: add PDF exports for final report and audit log
+
+ AI_AUDIT_LOG.pdf      | Bin 0 -> 2561457 bytes
+ HW04-final-report.pdf | Bin 0 -> 499793 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit baec24d47833c58ac50d688cfd052ffb7f7b8539
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:36:08 2026 +0700
+
+    docs: add final HW04 report and AI audit logs
+
+ AI_AUDIT_LOG.md      | 3933 ++++++++++++++++++++++
+ HW04-final-report.md |  240 ++
+ RAW_AUDIT_LOG.json   | 9006 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 13179 insertions(+)
+
+commit e3be422dee718a5e84d07b823daf995b8e667efa
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:35:27 2026 +0700
+
+    docs: add HTML execution reports and screenshot evidence
+
+ .../1533858008fdc7d7eb53911b330154336af0e2e5.md    | 146 ++++++++++
+ .../6102bd8cf71a6d17772608227653ca2ebf14a32b.md    | 146 ++++++++++
+ .../625a6839c736bcaa9e118421b6cf825ecaed0746.md    | 146 ++++++++++
+ .../7a498f412b10e186b08289332148b53d3cb1bf4a.png   | Bin 0 -> 26874 bytes
+ .../7ab2ad885999d91e553070103688b0174660584e.md    | 146 ++++++++++
+ .../7e53339351192b79389cfa84a0a5aeac81bcdeda.png   | Bin 0 -> 76407 bytes
+ .../8fd5745930e76437f4f77257809587d5287868ec.png   | Bin 0 -> 76719 bytes
+ .../9f154b4b86fdffb46ea7668b4e40535e89477668.png   | Bin 0 -> 28404 bytes
+ .../b1fa335897388ac018fc644ba568d07120f8f504.png   | Bin 0 -> 28455 bytes
+ .../b75c4df8fee9567cffbe14b28411324f5847d0b6.png   | Bin 0 -> 26953 bytes
+ .../b835da133f61579d38564b03dd61d4bb90eb90b6.md    | 146 ++++++++++
+ .../c1b2e1328a8e36414e5d9750b1ee5381da794e90.png   | Bin 0 -> 26989 bytes
+ .../d708cb5eaa632565a4e2768dfbf31658c88d5ca6.md    | 146 ++++++++++
+ .../f0e41af295f2947b3793e05cd64612406d5a16b7.png   | Bin 0 -> 28478 bytes
+ .../f1f5fd4df5ce4848859e448a100b5f7a4863ed03.png   | Bin 0 -> 76886 bytes
+ playwright/playwright-report/index.html            |  49 ++++
+ playwright/test-results/.last-run.json             |   9 +
+ .../error-context.md                               | 298 +++++++++++++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 26735 bytes
+ .../error-context.md                               | 295 ++++++++++++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 26735 bytes
+ .../error-context.md                               | 198 ++++++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 4254 bytes
+ .../error-context.md                               | 204 ++++++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 4254 bytes
+ tests/FR01/screenshots/ENV-homepage.png            | Bin 0 -> 25343 bytes
+ tests/FR01/screenshots/ENV-register-page.png       | Bin 0 -> 21337 bytes
+ tests/FR11/screenshots/ENV-login-page.png          | Bin 0 -> 18011 bytes
+ tests/FR11/screenshots/ENV-user-logged-in.png      | Bin 0 -> 15278 bytes
+ tests/FR14/screenshots/ENV-admin-logged-in.png     | Bin 0 -> 19255 bytes
+ tests/FR14/screenshots/ENV-admin-page.png          | Bin 0 -> 8772 bytes
+ tests/playwright-report/.last-run.json             |  14 +
+ .../error-context.md                               | 146 ++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 26874 bytes
+ .../error-context.md                               | 146 ++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 28404 bytes
+ .../error-context.md                               | 146 ++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 76407 bytes
+ .../error-context.md                               | 146 ++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 26953 bytes
+ .../error-context.md                               | 146 ++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 28455 bytes
+ .../error-context.md                               | 146 ++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 76719 bytes
+ .../error-context.md                               | 146 ++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 26989 bytes
+ .../error-context.md                               | 146 ++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 28478 bytes
+ .../error-context.md                               | 146 ++++++++++
+ .../test-failed-1.png                              | Bin 0 -> 76886 bytes
+ 50 files changed, 3257 insertions(+)
+
+commit 6238477e15e80c62701ddb33e53cf268793d91d1
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:35:15 2026 +0700
+
+    test: add smoke verification config and test suite
+
+ playwright/smoke.config.js | 26 +++++++++++++++++
+ playwright/smoke.spec.js   | 72 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 98 insertions(+)
+
+commit a3f375ac48fcadd463e7c262a0923743e5e8e8f1
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:35:10 2026 +0700
+
+    test: add FR-14 category management Playwright data-driven automation
+
+ tests/FR14/scripts/fr14_category.spec.js | 178 +++++++++++++++++++++++++++++++
+ 1 file changed, 178 insertions(+)
+
+commit b514b04d67acf86a2addc0926950405b154e7489
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:35:05 2026 +0700
+
+    test: add FR-11 order history view Playwright data-driven automation
+
+ tests/FR11/scripts/fr11_order_history.spec.js | 212 ++++++++++++++++++++++++++
+ 1 file changed, 212 insertions(+)
+
+commit e1648b126a705aca552e701982523db8ca227ea9
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:34:59 2026 +0700
+
+    test: add FR-01 account registration Playwright data-driven automation
+
+ tests/FR01/scripts/fr01_registration.spec.js | 83 ++++++++++++++++++++++++++++
+ 1 file changed, 83 insertions(+)
+
+commit de351013d9e7aa607cba5450748658e992685f65
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:34:54 2026 +0700
+
+    test: add external test data for FR-01, FR-11, and FR-14
+
+ tests/FR01/data/registration_data.json  | 159 +++++++++++++++++++++++++
+ tests/FR11/data/order_history_data.json | 201 ++++++++++++++++++++++++++++++++
+ tests/FR14/data/category_data.json      | 155 ++++++++++++++++++++++++
+ 3 files changed, 515 insertions(+)
+
+commit 376c0b89b5f9c5d60f85639d3f0f2eb74c714011
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:34:45 2026 +0700
+
+    chore: add environment config and gitignore
+
+ .gitignore                      | 21 +++++++++++
+ package-lock.json               | 75 +++++++++++++++++++++++++++++++++++++++
+ package.json                    |  5 +++
+ playwright/package-lock.json    | 78 +++++++++++++++++++++++++++++++++++++++++
+ playwright/package.json         | 15 ++++++++
+ playwright/playwright.config.js | 41 ++++++++++++++++++++++
+ 6 files changed, 235 insertions(+)
+
+commit 0b0fc96243d5e9c49d1118ab74624f56caeabe45
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 17:34:39 2026 +0700
+
+    docs: add HW04 workflow and skill definitions
+
+ SKILLS.md   | 1514 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ WORKFLOW.md | 1659 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 3173 insertions(+)
