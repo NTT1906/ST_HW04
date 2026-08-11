@@ -1,13 +1,16 @@
 {
   "name": "hw04-automation",
   "version": "1.0.0",
+  "type": "module",
   "description": "HW04 Data-Driven Automation Testing — EShop SUT",
   "scripts": {
     "test": "npx playwright test",
     "test:chromium": "npx playwright test --project=chromium",
     "test:firefox": "npx playwright test --project=firefox",
     "test:webkit": "npx playwright test --project=webkit",
-    "report": "npx playwright show-report"
+    "report": "npx playwright show-report",
+    "run-all": "bash run-all-reports.sh",
+    "patch": "node patch-reports.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.46.0"
