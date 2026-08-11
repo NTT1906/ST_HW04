@@ -1,4 +1,15 @@
-﻿commit 90bf30bb739880e789f6f9203c8d95d58e125f37
+﻿commit 86058d319d040a4e10d9e0402dabdef092e601e8
+Author: NTT1906 <nttislinked@gmail.com>
+Date:   Tue Aug 11 19:07:12 2026 +0700
+
+    docs: update full trajectory audit logs (RAW_AUDIT_LOG.json and AI_AUDIT_LOG.md) and git_history.txt
+
+ AI_AUDIT_LOG.md    | 1485 +++++++++++++++++++++++++-
+ RAW_AUDIT_LOG.json | 2930 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ git_history.txt    |  116 ++-
+ 3 files changed, 4525 insertions(+), 6 deletions(-)
+
+commit 90bf30bb739880e789f6f9203c8d95d58e125f37
 Author: NTT1906 <nttislinked@gmail.com>
 Date:   Tue Aug 11 18:57:40 2026 +0700
 
