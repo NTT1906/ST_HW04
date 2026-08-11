@@ -1,0 +1,556 @@
+├── bugs
+│   ├── FR01
+│   ├── FR11
+│   └── FR14
+├── eshop-sut
+│   ├── backend
+│   │   ├── database.js
+│   │   ├── database.sqlite
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── server.js
+│   │   └── test_profile.js
+│   ├── bugs
+│   │   ├── FR01
+│   │   │   ├── screenshots
+│   │   │   │   ├── FR01-ISSUE-BUG-001.png
+│   │   │   │   ├── FR01-ISSUE-BUG-002.png
+│   │   │   │   ├── FR01-ISSUE-BUG-003.png
+│   │   │   │   ├── TC001-after.png
+│   │   │   │   ├── TC004-after.png
+│   │   │   │   ├── TC005-after.png
+│   │   │   │   ├── TC006-after.png
+│   │   │   │   └── TC007-after.png
+│   │   │   ├── BUG-001.md
+│   │   │   ├── BUG-002.md
+│   │   │   ├── BUG-003.md
+│   │   │   └── BUG-01-second-pass.md
+│   │   ├── FR11
+│   │   │   ├── screenshots
+│   │   │   │   ├── FR11-ISSUE-BUG-001_P1.png
+│   │   │   │   └── FR11-ISSUE-BUG-001_P2.png
+│   │   │   └── BUG-001.md
+│   │   ├── FR14
+│   │   │   ├── screenshots
+│   │   │   │   ├── FR14-ISSUE-BUG-001.png
+│   │   │   │   ├── FR14-ISSUE-BUG-002.png
+│   │   │   │   ├── FR14-ISSUE-BUG-003.png
+│   │   │   │   ├── FR14-ISSUE-BUG-004.png
+│   │   │   │   └── FR14-ISSUE-BUG-005.png
+│   │   │   ├── BUG-001.md
+│   │   │   ├── BUG-002.md
+│   │   │   ├── BUG-003.md
+│   │   │   ├── BUG-004.md
+│   │   │   └── BUG-005.md
+│   │   └── FR20
+│   │       ├── screenshots
+│   │       │   ├── BUG-001-decimal.png
+│   │       │   ├── BUG-001-negative.png
+│   │       │   ├── BUG-001-nonnumeric.png
+│   │       │   ├── BUG-001-zero.png
+│   │       │   ├── BUG-002-overflow.png
+│   │       │   ├── FR20-ISSUE-BUG-001_P1.png
+│   │       │   ├── FR20-ISSUE-BUG-001_P2.png
+│   │       │   ├── FR20-ISSUE-BUG-001_P3.png
+│   │       │   ├── FR20-ISSUE-BUG-001_P4.png
+│   │       │   ├── FR20-ISSUE-BUG-002_P1.png
+│   │       │   └── FR20-ISSUE-BUG-002_P2.png
+│   │       ├── BUG-001.md
+│   │       └── BUG-002.md
+│   ├── frontend-admin
+│   │   ├── public
+│   │   │   ├── favicon.svg
+│   │   │   └── icons.svg
+│   │   ├── src
+│   │   │   ├── assets
+│   │   │   │   ├── hero.png
+│   │   │   │   ├── react.svg
+│   │   │   │   └── vite.svg
+│   │   │   ├── App.css
+│   │   │   ├── App.jsx
+│   │   │   ├── index.css
+│   │   │   └── main.jsx
+│   │   ├── .gitignore
+│   │   ├── eslint.config.js
+│   │   ├── index.html
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── postcss.config.js
+│   │   ├── README.md
+│   │   ├── tailwind.config.js
+│   │   └── vite.config.js
+│   ├── frontend-mobile
+│   │   ├── .expo
+│   │   │   ├── devices.json
+│   │   │   └── README.md
+│   │   ├── assets
+│   │   │   ├── adaptive-icon.png
+│   │   │   ├── favicon.png
+│   │   │   ├── icon.png
+│   │   │   └── splash-icon.png
+│   │   ├── .gitignore
+│   │   ├── App.js
+│   │   ├── app.json
+│   │   ├── index.js
+│   │   ├── package-lock.json
+│   │   └── package.json
+│   ├── frontend-web
+│   │   ├── public
+│   │   │   ├── favicon.svg
+│   │   │   └── icons.svg
+│   │   ├── src
+│   │   │   ├── assets
+│   │   │   │   ├── hero.png
+│   │   │   │   ├── react.svg
+│   │   │   │   └── vite.svg
+│   │   │   ├── context
+│   │   │   │   ├── AuthContext.jsx
+│   │   │   │   └── CartContext.jsx
+│   │   │   ├── pages
+│   │   │   │   ├── Cart.jsx
+│   │   │   │   ├── Checkout.jsx
+│   │   │   │   ├── ForgotPassword.jsx
+│   │   │   │   ├── Home.jsx
+│   │   │   │   ├── Login.jsx
+│   │   │   │   ├── ProductDetail.jsx
+│   │   │   │   ├── Profile.jsx
+│   │   │   │   └── Register.jsx
+│   │   │   ├── App.css
+│   │   │   ├── App.jsx
+│   │   │   ├── index.css
+│   │   │   └── main.jsx
+│   │   ├── .gitignore
+│   │   ├── eslint.config.js
+│   │   ├── index.html
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── postcss.config.js
+│   │   ├── README.md
+│   │   ├── tailwind.config.js
+│   │   └── vite.config.js
+│   ├── playwright
+│   │   ├── env_check_fr11.js
+│   │   ├── env_check_fr14.js
+│   │   ├── env_check.js
+│   │   ├── exec_fr01_bva.js
+│   │   ├── exec_fr01_dt.js
+│   │   ├── exec_fr11_bva.js
+│   │   ├── exec_fr11_dt.js
+│   │   ├── exec_fr14_dt.js
+│   │   ├── generate_raw_audit_fr14.js
+│   │   ├── inspect_fields.js
+│   │   ├── package-lock.json
+│   │   └── package.json
+│   ├── tests
+│   │   ├── FR01
+│   │   │   ├── screenshots
+│   │   │   │   ├── BVA-TC001-after.png
+│   │   │   │   ├── BVA-TC001-before.png
+│   │   │   │   ├── BVA-TC002-after.png
+│   │   │   │   ├── BVA-TC002-before.png
+│   │   │   │   ├── BVA-TC003-after.png
+│   │   │   │   ├── BVA-TC003-before.png
+│   │   │   │   ├── ENV-homepage.png
+│   │   │   │   ├── ENV-register-page.png
+│   │   │   │   ├── TC001-after.png
+│   │   │   │   ├── TC001-before.png
+│   │   │   │   ├── TC002-after.png
+│   │   │   │   ├── TC002-before.png
+│   │   │   │   ├── TC003-after.png
+│   │   │   │   ├── TC003-before.png
+│   │   │   │   ├── TC004-after.png
+│   │   │   │   ├── TC004-before.png
+│   │   │   │   ├── TC005-after.png
+│   │   │   │   ├── TC005-before.png
+│   │   │   │   ├── TC006-after.png
+│   │   │   │   ├── TC006-before.png
+│   │   │   │   ├── TC007-after.png
+│   │   │   │   ├── TC007-before.png
+│   │   │   │   ├── TC008-after.png
+│   │   │   │   ├── TC008-before.png
+│   │   │   │   ├── TC009-after.png
+│   │   │   │   ├── TC009-before.png
+│   │   │   │   ├── TC010-after.png
+│   │   │   │   ├── TC010-before.png
+│   │   │   │   ├── TC011-after.png
+│   │   │   │   ├── TC011-before.png
+│   │   │   │   ├── TC012-after.png
+│   │   │   │   ├── TC012-before.png
+│   │   │   │   ├── TC013-after.png
+│   │   │   │   └── TC013-before.png
+│   │   │   ├── scripts
+│   │   │   ├── testcases
+│   │   │   ├── AUDIT-01-log.md
+│   │   │   ├── BVA-01-boundary-analysis.md
+│   │   │   ├── bva-execution-results.json
+│   │   │   ├── DT-01-feature-understanding.md
+│   │   │   ├── DT-02-domain-identification.md
+│   │   │   ├── DT-03-domain-partitioning.md
+│   │   │   ├── DT-04-test-cases.md
+│   │   │   ├── ENV-01.md
+│   │   │   ├── execution-bva.md
+│   │   │   ├── execution-results.json
+│   │   │   ├── execution.md
+│   │   │   ├── GAP-01-gap-analysis.md
+│   │   │   ├── RAW_AUDIT_FR01.md
+│   │   │   ├── REPORT-FR01.md
+│   │   │   ├── REPORT-FR01.pdf
+│   │   │   ├── REVIEW-01-of-DT-01.md
+│   │   │   ├── REVIEW-01-of-DT-02.md
+│   │   │   └── REVIEW-01-of-DT-03.md
+│   │   ├── FR11
+│   │   │   ├── screenshots
+│   │   │   │   ├── ENV-01-after-login.png
+│   │   │   │   ├── ENV-01-login-page.png
+│   │   │   │   ├── ENV-01-profile-page.png
+│   │   │   │   ├── TC-BVA-001.png
+│   │   │   │   ├── TC-BVA-002.png
+│   │   │   │   ├── TC-BVA-003.png
+│   │   │   │   ├── TC-BVA-004.png
+│   │   │   │   ├── TC-BVA-005.png
+│   │   │   │   ├── TC-BVA-006.png
+│   │   │   │   ├── TC-DT-001.png
+│   │   │   │   ├── TC-DT-002.png
+│   │   │   │   ├── TC-DT-003.png
+│   │   │   │   ├── TC-DT-005.png
+│   │   │   │   ├── TC-DT-006.png
+│   │   │   │   ├── TC-DT-007.png
+│   │   │   │   ├── TC-DT-008.png
+│   │   │   │   ├── TC-DT-009-after.png
+│   │   │   │   ├── TC-DT-009-before.png
+│   │   │   │   └── TC-DT-011.png
+│   │   │   ├── scripts
+│   │   │   ├── testcases
+│   │   │   ├── AUDIT-01-log.md
+│   │   │   ├── BVA-01-boundary-analysis.md
+│   │   │   ├── DT-01-feature-understanding.md
+│   │   │   ├── DT-02-domain-identification.md
+│   │   │   ├── DT-03-domain-partitioning.md
+│   │   │   ├── DT-04-test-cases.md
+│   │   │   ├── ENV-01-environment-report.md
+│   │   │   ├── execution-bva-results.json
+│   │   │   ├── execution-bva.md
+│   │   │   ├── execution-results.json
+│   │   │   ├── execution.md
+│   │   │   ├── GAP-01-gap-analysis.md
+│   │   │   ├── RAW_AUDIT_FR11.md
+│   │   │   ├── REPORT-FR11.md
+│   │   │   ├── REPORT-FR11.pdf
+│   │   │   ├── REVIEW-01-of-DT-01.md
+│   │   │   ├── REVIEW-01-of-DT-02.md
+│   │   │   └── REVIEW-01-of-DT-03.md
+│   │   ├── FR14
+│   │   │   ├── screenshots
+│   │   │   │   ├── ENV-01-categories-page.png
+│   │   │   │   ├── ENV-01-dashboard.png
+│   │   │   │   ├── ENV-01-login-page.png
+│   │   │   │   ├── TC-DT-001-after.png
+│   │   │   │   ├── TC-DT-002-after.png
+│   │   │   │   ├── TC-DT-003-after.png
+│   │   │   │   ├── TC-DT-004-after.png
+│   │   │   │   ├── TC-DT-005-after.png
+│   │   │   │   ├── TC-DT-006-after.png
+│   │   │   │   ├── TC-DT-007-after.png
+│   │   │   │   ├── TC-DT-010-after.png
+│   │   │   │   └── TC-DT-013-after.png
+│   │   │   ├── AUDIT-01-log.md
+│   │   │   ├── BVA-01-boundary-analysis.md
+│   │   │   ├── DT-01-feature-understanding.md
+│   │   │   ├── DT-02-domain-identification.md
+│   │   │   ├── DT-03-domain-partitioning.md
+│   │   │   ├── DT-04-test-cases.md
+│   │   │   ├── ENV-01-environment-report.md
+│   │   │   ├── execution-bva.md
+│   │   │   ├── execution-results.json
+│   │   │   ├── execution.md
+│   │   │   ├── GAP-01-gap-analysis.md
+│   │   │   ├── RAW_AUDIT_FR14.md
+│   │   │   ├── REPORT-FR14.md
+│   │   │   ├── REPORT-FR14.pdf
+│   │   │   ├── REVIEW-01-of-DT-01.md
+│   │   │   ├── REVIEW-01-of-DT-02.md
+│   │   │   └── REVIEW-01-of-DT-03.md
+│   │   └── FR20
+│   │       ├── screenshots
+│   │       │   ├── ENV-01-product-screen.png
+│   │       │   ├── TC001-after.png
+│   │       │   ├── TC001-before.png
+│   │       │   ├── TC002-after.png
+│   │       │   ├── TC002-before.png
+│   │       │   ├── TC004-after.png
+│   │       │   ├── TC005-after.png
+│   │       │   ├── TC006-after.png
+│   │       │   ├── TC007-after.png
+│   │       │   ├── TC008-after.png
+│   │       │   └── TCBVA004-after.png
+│   │       ├── scripts
+│   │       │   └── exec_fr20.ps1
+│   │       ├── alert_screen.png
+│   │       ├── AUDIT-01-log.md
+│   │       ├── BVA-01-boundary-analysis.md
+│   │       ├── bva-execution-results.json
+│   │       ├── DT-01-feature-understanding.md
+│   │       ├── DT-02-domain-identification.md
+│   │       ├── DT-03-domain-partitioning.md
+│   │       ├── DT-04-test-cases.md
+│   │       ├── ENV-01-environment-report.md
+│   │       ├── execution-bva.md
+│   │       ├── execution-results.json
+│   │       ├── execution.md
+│   │       ├── GAP-01-gap-analysis.md
+│   │       ├── home_screen.png
+│   │       ├── RAW_AUDIT_FR20.md
+│   │       ├── REPORT-FR20.md
+│   │       ├── REPORT-FR20.pdf
+│   │       ├── REVIEW-01-of-DT-01.md
+│   │       ├── REVIEW-01-of-DT-02.md
+│   │       ├── REVIEW-01-of-DT-03.md
+│   │       └── tap_test.png
+│   ├── .gitignore
+│   ├── AI_AUDIT_AND_CRITIQUE.md
+│   ├── api_specification.md
+│   ├── git_commit_log.txt
+│   ├── MAIN_REPORT.md
+│   └── run_servers.sh
+├── playwright
+│   ├── playwright-report
+│   │   ├── data
+│   │   │   ├── 1533858008fdc7d7eb53911b330154336af0e2e5.md
+│   │   │   ├── 6102bd8cf71a6d17772608227653ca2ebf14a32b.md
+│   │   │   ├── 625a6839c736bcaa9e118421b6cf825ecaed0746.md
+│   │   │   ├── 7a498f412b10e186b08289332148b53d3cb1bf4a.png
+│   │   │   ├── 7ab2ad885999d91e553070103688b0174660584e.md
+│   │   │   ├── 7e53339351192b79389cfa84a0a5aeac81bcdeda.png
+│   │   │   ├── 8fd5745930e76437f4f77257809587d5287868ec.png
+│   │   │   ├── 9f154b4b86fdffb46ea7668b4e40535e89477668.png
+│   │   │   ├── b1fa335897388ac018fc644ba568d07120f8f504.png
+│   │   │   ├── b75c4df8fee9567cffbe14b28411324f5847d0b6.png
+│   │   │   ├── b835da133f61579d38564b03dd61d4bb90eb90b6.md
+│   │   │   ├── c1b2e1328a8e36414e5d9750b1ee5381da794e90.png
+│   │   │   ├── d708cb5eaa632565a4e2768dfbf31658c88d5ca6.md
+│   │   │   ├── f0e41af295f2947b3793e05cd64612406d5a16b7.png
+│   │   │   └── f1f5fd4df5ce4848859e448a100b5f7a4863ed03.png
+│   │   └── index.html
+│   ├── test-results
+│   │   ├── .playwright-artifacts-12
+│   │   ├── .playwright-artifacts-9
+│   │   ├── fr01_registration-FR-01-—--161c0-has-fewer-than-8-characters-firefox
+│   │   │   └── error-context.md
+│   │   ├── fr01_registration-FR-01-—--1adb5--when-password-has-no-digit-firefox
+│   │   │   └── error-context.md
+│   │   ├── fr01_registration-FR-01-—--37063-ails-when-password-is-empty-firefox
+│   │   │   └── error-context.md
+│   │   ├── fr01_registration-FR-01-—--e9b21-ord-has-no-lowercase-letter-firefox
+│   │   │   └── error-context.md
+│   │   ├── fr14_category-FR-14-—-Cate-2bef2--access-Category-Management-webkit
+│   │   │   ├── error-context.md
+│   │   │   └── test-failed-1.png
+│   │   ├── fr14_category-FR-14-—-Cate-36794-ategory-with-duplicate-name-webkit
+│   │   │   ├── error-context.md
+│   │   │   └── test-failed-1.png
+│   │   ├── fr14_category-FR-14-—-Cate-b72ac-categories-non-admin-token--webkit
+│   │   │   ├── error-context.md
+│   │   │   └── test-failed-1.png
+│   │   ├── fr14_category-FR-14-—-Cate-c5498--with-empty-whitespace-name-webkit
+│   │   │   ├── error-context.md
+│   │   │   └── test-failed-1.png
+│   │   └── .last-run.json
+│   ├── fr01.chromium.config.js
+│   ├── fr01.firefox.config.js
+│   ├── fr01.webkit.config.js
+│   ├── fr11.chromium.config.js
+│   ├── fr11.firefox.config.js
+│   ├── fr11.webkit.config.js
+│   ├── fr14.chromium.config.js
+│   ├── fr14.firefox.config.js
+│   ├── fr14.webkit.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── patch-reports.js
+│   ├── playwright.config.js
+│   ├── reporter-with-student-id.js
+│   ├── run_all.js
+│   ├── run-all-reports.sh
+│   ├── smoke.config.js
+│   └── smoke.spec.js
+├── tests
+│   ├── FR01
+│   │   ├── data
+│   │   │   └── registration_data.json
+│   │   ├── logs
+│   │   ├── reports
+│   │   │   ├── chromium
+│   │   │   │   ├── data
+│   │   │   │   │   ├── 2073fc9e9cd20b5e6052ee53812cce488aafc47f.md
+│   │   │   │   │   ├── 337881e3b19b13f53b75c90bfd12e0b833aad8d1.md
+│   │   │   │   │   ├── 7a498f412b10e186b08289332148b53d3cb1bf4a.png
+│   │   │   │   │   ├── b75c4df8fee9567cffbe14b28411324f5847d0b6.png
+│   │   │   │   │   ├── be6633f09c28e12dceaa4e8d978995ae4fa50f31.md
+│   │   │   │   │   └── c1b2e1328a8e36414e5d9750b1ee5381da794e90.png
+│   │   │   │   └── index.html
+│   │   │   ├── firefox
+│   │   │   │   ├── data
+│   │   │   │   │   ├── 2073fc9e9cd20b5e6052ee53812cce488aafc47f.md
+│   │   │   │   │   ├── 337881e3b19b13f53b75c90bfd12e0b833aad8d1.md
+│   │   │   │   │   ├── 9f154b4b86fdffb46ea7668b4e40535e89477668.png
+│   │   │   │   │   ├── b1fa335897388ac018fc644ba568d07120f8f504.png
+│   │   │   │   │   ├── be6633f09c28e12dceaa4e8d978995ae4fa50f31.md
+│   │   │   │   │   └── f0e41af295f2947b3793e05cd64612406d5a16b7.png
+│   │   │   │   └── index.html
+│   │   │   └── webkit
+│   │   │       ├── data
+│   │   │       │   ├── 283edb3fe63502057aa2936bd381939cfa6c7a83.md
+│   │   │       │   ├── 3b792d072c39c6abb2513265a824d45562c1ebf4.md
+│   │   │       │   ├── 7e53339351192b79389cfa84a0a5aeac81bcdeda.png
+│   │   │       │   ├── 8fd5745930e76437f4f77257809587d5287868ec.png
+│   │   │       │   ├── 9b7291d6c27dcc8df5706ca8ae190c03cf0bf752.md
+│   │   │       │   └── f1f5fd4df5ce4848859e448a100b5f7a4863ed03.png
+│   │   │       └── index.html
+│   │   ├── screenshots
+│   │   │   ├── ENV-homepage.png
+│   │   │   └── ENV-register-page.png
+│   │   ├── scripts
+│   │   │   └── fr01_registration.spec.js
+│   │   ├── testcases
+│   │   ├── traces
+│   │   └── videos
+│   ├── FR11
+│   │   ├── data
+│   │   │   └── order_history_data.json
+│   │   ├── logs
+│   │   ├── reports
+│   │   │   ├── chromium
+│   │   │   │   ├── data
+│   │   │   │   │   ├── 0726ccbcf99125185f2abcf5de5e36e55e895a8d.png
+│   │   │   │   │   ├── 157d12a4c417b78170e681d2db43ea0edbdc5f8a.md
+│   │   │   │   │   ├── 185f944e00bba1852e93f2f7bf18fc76881347e6.md
+│   │   │   │   │   ├── 3664d3658a148a29555b1c39cbb1803145488f94.md
+│   │   │   │   │   ├── 409f6820137fb1ef3245a747370a69ec70891306.md
+│   │   │   │   │   ├── 5a7000cc6fc78170b424d70c7c468a8870708970.md
+│   │   │   │   │   ├── 613ab73af998f3186d09e1e8222e7f98d25b7f4e.png
+│   │   │   │   │   ├── 78485ad26ab49de2007fe98b0854715a58aaf5b6.png
+│   │   │   │   │   ├── ba3c82baaa8e7605a2f0f554a86ea067a135d9ff.md
+│   │   │   │   │   ├── eb03e5839e44f782cc3e284ee51edb840d3421f7.png
+│   │   │   │   │   ├── f40862a2d359dc2384a3ff6699011c7a3ed262fb.png
+│   │   │   │   │   └── fdf175daf9b3634303780dd67f63fd846f67f5b8.png
+│   │   │   │   └── index.html
+│   │   │   ├── firefox
+│   │   │   │   ├── data
+│   │   │   │   │   ├── 0961bce40df92ad94de78c7dff93bb78a6ca3d05.png
+│   │   │   │   │   ├── 157d12a4c417b78170e681d2db43ea0edbdc5f8a.md
+│   │   │   │   │   ├── 185f944e00bba1852e93f2f7bf18fc76881347e6.md
+│   │   │   │   │   ├── 409f6820137fb1ef3245a747370a69ec70891306.md
+│   │   │   │   │   ├── 5a131f8ec8d6d9fbbeb3cb6da699c608449f8518.png
+│   │   │   │   │   ├── 5a7000cc6fc78170b424d70c7c468a8870708970.md
+│   │   │   │   │   ├── 6fabe280ea112fdbfaf1ef2705f0569fd70fdeaf.png
+│   │   │   │   │   ├── 73386581d6ff81778dab86392072ef77d0637e4c.png
+│   │   │   │   │   ├── 852ae7ee60b277b08ad8976a9b42cb2ca17f960c.png
+│   │   │   │   │   ├── ba3c82baaa8e7605a2f0f554a86ea067a135d9ff.md
+│   │   │   │   │   ├── d7a5eed98f52b3a8ab83bfb6cda4263aac918b89.png
+│   │   │   │   │   └── fb89faa2a53fc19e0d29fca2839bc59bdcfe7b22.md
+│   │   │   │   └── index.html
+│   │   │   └── webkit
+│   │   │       ├── data
+│   │   │       │   ├── 157d12a4c417b78170e681d2db43ea0edbdc5f8a.md
+│   │   │       │   ├── 185f944e00bba1852e93f2f7bf18fc76881347e6.md
+│   │   │       │   ├── 227d8952fc70dfffd0d211c8d2c4183f3bae1bf9.png
+│   │   │       │   ├── 2dd4d4120e2f58e6b4c88677a7fbfa8ca9ac5d51.md
+│   │   │       │   ├── 31633ed06ffc30f8ef96db906dd4676798ead143.png
+│   │   │       │   ├── 409f6820137fb1ef3245a747370a69ec70891306.md
+│   │   │       │   ├── 5a7000cc6fc78170b424d70c7c468a8870708970.md
+│   │   │       │   ├── 5ecef8b7364a908d8a1acf8b9cac981ef351e730.png
+│   │   │       │   ├── b9c03910b9d54abe7019ced22f80063f484dacc2.png
+│   │   │       │   ├── ba3c82baaa8e7605a2f0f554a86ea067a135d9ff.md
+│   │   │       │   ├── d31d3c23bf8cc4893194c57543d97fed84030151.png
+│   │   │       │   └── fab29a3ba2e9effec0b50706fea26e89eb1dbe8b.png
+│   │   │       └── index.html
+│   │   ├── screenshots
+│   │   │   ├── ENV-login-page.png
+│   │   │   └── ENV-user-logged-in.png
+│   │   ├── scripts
+│   │   │   └── fr11_order_history.spec.js
+│   │   ├── testcases
+│   │   ├── traces
+│   │   └── videos
+│   ├── FR14
+│   │   ├── data
+│   │   │   └── category_data.json
+│   │   ├── logs
+│   │   ├── reports
+│   │   │   ├── chromium
+│   │   │   │   ├── data
+│   │   │   │   │   ├── 32183c8c073f756b5c4ec051777252c3e3d2d534.md
+│   │   │   │   │   ├── 611809c3b5c00e40a3da4e366b1e6b0642b9be4b.png
+│   │   │   │   │   ├── 78485ad26ab49de2007fe98b0854715a58aaf5b6.png
+│   │   │   │   │   ├── c8550b5b0d1308fe6f2237024a9aa86bec586f46.md
+│   │   │   │   │   ├── e170fd7cac965f2cd2c8624b51cf6823babc3da8.md
+│   │   │   │   │   └── fafcd7a4ffe9bc95f148b63852bf071dce3d7595.md
+│   │   │   │   └── index.html
+│   │   │   ├── firefox
+│   │   │   │   ├── data
+│   │   │   │   │   ├── 32183c8c073f756b5c4ec051777252c3e3d2d534.md
+│   │   │   │   │   ├── 4f51e7888dc7747bf1280aecac0686df05247587.md
+│   │   │   │   │   ├── 4fc1981215e861a276c2e97b7e93ba4b17a21cfc.png
+│   │   │   │   │   ├── 8defd10a95ba9298b3a6cec8a25ef70813c55a7a.md
+│   │   │   │   │   ├── c8550b5b0d1308fe6f2237024a9aa86bec586f46.md
+│   │   │   │   │   └── d7a5eed98f52b3a8ab83bfb6cda4263aac918b89.png
+│   │   │   │   └── index.html
+│   │   │   └── webkit
+│   │   │       ├── data
+│   │   │       │   ├── 01ed0050524a0f9589b5c2404ed47a4520c017fc.md
+│   │   │       │   ├── 32183c8c073f756b5c4ec051777252c3e3d2d534.md
+│   │   │       │   ├── 440827ec3fe4c614b55ce258bb9a682aa01d1f0d.png
+│   │   │       │   ├── 5ecef8b7364a908d8a1acf8b9cac981ef351e730.png
+│   │   │       │   ├── 8c2158d1250ffc6ad08bb79f6078317746d9a230.md
+│   │   │       │   └── c8550b5b0d1308fe6f2237024a9aa86bec586f46.md
+│   │   │       └── index.html
+│   │   ├── screenshots
+│   │   │   ├── ENV-admin-logged-in.png
+│   │   │   └── ENV-admin-page.png
+│   │   ├── scripts
+│   │   │   └── fr14_category.spec.js
+│   │   ├── testcases
+│   │   ├── traces
+│   │   └── videos
+│   └── playwright-report
+│       ├── FR01-scripts-fr01_registra-2152d-ation-with-all-valid-inputs-chromium
+│       │   ├── error-context.md
+│       │   └── test-failed-1.png
+│       ├── FR01-scripts-fr01_registra-2152d-ation-with-all-valid-inputs-firefox
+│       │   ├── error-context.md
+│       │   └── test-failed-1.png
+│       ├── FR01-scripts-fr01_registra-2152d-ation-with-all-valid-inputs-webkit
+│       │   ├── error-context.md
+│       │   └── test-failed-1.png
+│       ├── FR01-scripts-fr01_registra-d1da6--boundary-Min-8-characters--chromium
+│       │   ├── error-context.md
+│       │   └── test-failed-1.png
+│       ├── FR01-scripts-fr01_registra-d1da6--boundary-Min-8-characters--firefox
+│       │   ├── error-context.md
+│       │   └── test-failed-1.png
+│       ├── FR01-scripts-fr01_registra-d1da6--boundary-Min-8-characters--webkit
+│       │   ├── error-context.md
+│       │   └── test-failed-1.png
+│       ├── FR01-scripts-fr01_registra-fe712-oundary-Min-1-9-characters--chromium
+│       │   ├── error-context.md
+│       │   └── test-failed-1.png
+│       ├── FR01-scripts-fr01_registra-fe712-oundary-Min-1-9-characters--firefox
+│       │   ├── error-context.md
+│       │   └── test-failed-1.png
+│       ├── FR01-scripts-fr01_registra-fe712-oundary-Min-1-9-characters--webkit
+│       │   ├── error-context.md
+│       │   └── test-failed-1.png
+│       └── .last-run.json
+├── .gitignore
+├── 2026.HW04.Automation Testing_En.md
+├── AI_AUDIT_LOG.md
+├── AI_AUDIT_LOG.pdf
+├── git_history.txt
+├── HW04-final-report.md
+├── HW04-final-report.pdf
+├── package-lock.json
+├── package.json
+├── RAW_AUDIT_LOG.json
+├── SKILLS.md
+├── tree.txt
+└── WORKFLOW.md

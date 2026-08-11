@@ -1,6 +1,8 @@
 # HW04 — Data-Driven Automation Testing: Final Report (Revised)
 
-**Course:** Software Testing / Data-Driven Automation  
+**Course:** Software Testing / Data-Driven Automation
+**Student ID:** 23127255
+**Student Name:** Nguyễn Thọ Tài
 **Date:** 2026-08-11  
 **AI Tool:** Antigravity (Gemini 3.6 Flash)  
 **Skill:** `REPORT-01`  
@@ -228,13 +230,3 @@ All defect classifications are based strictly on observable UI, API response, an
 - **No Evidence Fabrication:** All execution results, screenshots (`playwright/test-results/`), error context logs, and HTML reports derive strictly from real Playwright test runs against the running SUT.
 - **Black-Box Compliance:** All defect descriptions and test oracles rely exclusively on observable UI behavior, API status/payloads, and `api_specification.md` requirements. No internal SUT source code files are cited as primary defect evidence.
 - **Mathematical Consistency:** 47 candidate test cases = 46 approved automated cases + 1 excluded case (`TC-DT-012`). Multi-browser runs = 46 cases × 3 engines = 138 total runs (99 Pass / 39 Fail).
-
----
-
-## STOP — WAITING FOR HUMAN REVIEW
-
-The revised final HW04 report is complete.
-
-Please review the updated report above.
-
-**End of HW04 Process.**
