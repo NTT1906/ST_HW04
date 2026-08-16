@@ -17,3 +17,10 @@ Thumbs.db
 .env.local
 .env.development.local
 .env.production.local
+
+# HW05 Performance Test — credentials & generated results (do NOT commit)
+k6/data/users.csv
+k6/data/users_register_log.json
+k6/results/*.json
+k6/results/*.txt
+k6/results/*.csv
