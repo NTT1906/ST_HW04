@@ -1,12 +1,10 @@
-# HW04 — Data-Driven Automation Testing: Final Report (Revised)
+# HW04 — Data-Driven Automation Testing
 
 **Course:** Software Testing / Data-Driven Automation
 **Student ID:** 23127255
 **Student Name:** Nguyễn Thọ Tài
 **Date:** 2026-08-11  
-**AI Tool:** Antigravity (Gemini 3.6 Flash)  
-**Skill:** `REPORT-01`  
-**Stage:** Stage 8 — Compile Final HW04 Report  
+**AI Tool:** Antigravity (Gemini 3.6 Flash + Claude Sonnet)  
 
 ---
 
