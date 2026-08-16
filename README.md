@@ -159,7 +159,12 @@ SUT_HW04/
 
 ---
 
-## 7. Mandatory Declarations
+## 7. Mandatory Declarations & Audit Logs
+
+### AI Audit Trail & Raw Transcript (AUDIT-01)
+- **Raw AI Transcript (Full Untruncated JSONL):** [`RAW_AUDIT_LOG.jsonl`](file:///c:/Users/nttis/Downloads/SUT_HW04/RAW_AUDIT_LOG.jsonl) (691 KB)
+- **Raw AI Transcript (Compact Token-efficient JSONL):** [`RAW_AUDIT_LOG_compact.jsonl`](file:///c:/Users/nttis/Downloads/SUT_HW04/RAW_AUDIT_LOG_compact.jsonl) (487 KB)
+- **Structured AI Audit Log:** [`AI_AUDIT_LOG.md`](file:///c:/Users/nttis/Downloads/SUT_HW04/AI_AUDIT_LOG.md)
 
 ### AI Usage Declaration
 I use AI tools (Claude Sonnet 4.6, Gemini 3.6 Flash, and Antigravity IDE Assistant) for script generation, result aggregation, gap analysis, and report formatting. All results were critically audited by human review (Stage 13 GAP-01 table).
