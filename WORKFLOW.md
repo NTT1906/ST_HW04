@@ -1,22 +1,45 @@
-# HW04 AI Workflow — Data-Driven Automation Testing
+# HW05 AI Workflow — Backend API Performance Testing
 
-This workflow orchestrates the skills defined in `SKILLS.md`.
+This workflow orchestrates the reusable skills defined in `SKILLS.md`.
 
-The workflow is designed for the HW04 Software Testing — Automation Testing
-assignment.
+HW05 is an AI-assisted backend API performance-testing assignment.
+The selected performance-testing tool is k6.
 
-The workflow uses an AI-First strategy while keeping all final decisions,
-reviews, corrections, and execution verification under human control.
+Student ID: 23127255.
+Platform: Windows 11 (Prefered) + Ubuntu 24.04 WSL.
+SUT Source: eshop-sut/
 
-eshop-sut/
-    = LEGACY HW02 REFERENCE ONLY
+---
 
-SUT_HW04/tests/
-    = NEW HW04 ARTIFACTS
+# 0. Mandatory First Read
 
-Do not write HW04 artifacts into eshop-sut/.
-Do not modify HW02 artifacts in eshop-sut/.
-Do not treat files under eshop-sut/tests/ or eshop-sut/bugs/ as HW04 execution evidence.
+Before performing ANY HW05 task, read:
+
+`2026.HW05.Performance Testing_En_2.0_TA.md`
+
+This file is the primary authority for:
+
+- HW05 scope and requirements;
+- Load, Stress, and Spike testing;
+- endpoint-group requirements;
+- AI-first strategy;
+- human review;
+- endurance testing;
+- AI analysis;
+- AI critique;
+- continuous performance testing;
+- Agent Skill requirements;
+- evidence;
+- Git requirements;
+- submission requirements.
+
+Then read:
+
+`api_specification.md`
+
+Use it as the authoritative source for documented EShop API behavior.
+
+Do not begin test-plan generation before reading both files.
 
 ---
 
@@ -28,1632 +51,925 @@ This workflow is human-driven.
 
 Unless explicitly instructed otherwise:
 
-- Execute exactly **one skill at a time**.
+- Execute one skill at a time.
 - Produce only the artifact requested by the current stage.
-- Stop immediately after producing the artifact.
+- Stop after producing the artifact.
 - Wait for explicit human approval before continuing.
-- Never execute the next skill automatically.
-- Never assume human approval.
-- Never modify an approved artifact unless the human explicitly requests it.
-- Never silently overwrite an existing artifact.
-- Never fabricate test results, screenshots, traces, logs, reports, timestamps,
-  bugs, or other evidence.
-- Treat the EShop application as a **black-box from the implementation
-  perspective**, while using the provided `api_specification.md` as an
-  authoritative external specification.
-- Use the implemented UI and `api_specification.md` to establish feature
-  behavior, inputs, preconditions, and related API endpoints.
-- Do not inspect or depend on application source-code implementation details
-  unless explicitly authorized by the human.
-- If required information cannot be established from the implemented UI,
-  `api_specification.md`, or approved project artifacts, stop and request the
-  missing evidence.
-- Preserve existing HW02/HW03 artifacts unless the human explicitly requests
-  modification.
-- Do not replace an existing artifact with a newly generated version merely
-  because the new version is more convenient.
+- Never assume approval.
+- Never silently modify an approved artifact.
+- Never fabricate test results, screenshots, logs, metrics, bugs, timestamps,
+  or other evidence.
+- Preserve raw execution results.
+- Do not use frontend/browser automation as the HW05 load generator.
+- Do not invent API behavior.
+- Do not inspect backend source code unless explicitly authorized.
+- Use `api_specification.md` and actual SUT behavior to establish API behavior.
 
 ## Human Review Gate
-
-After every skill execution:
 
 ```text
 Skill
   ↓
-Artifact produced
+Artifact
   ↓
 HUMAN REVIEW
   ↓
 Approved?
- ├── NO → Stop and correct/re-run as instructed
+ ├── NO → Correct/re-run as instructed
  └── YES
        ↓
-     Continue to next stage
+     Continue
 ```
 
-The workflow must never interpret the absence of a rejection as approval.
+The workflow must never interpret absence of rejection as approval.
 
 ---
 
-# 2. HW04 Scope
+# 2. HW05 Scope
 
-The three HW04 web features are the same three web features selected in HW02:
+## SUT
 
-- `FR-01` — Account Registration
-- `FR-11` — Order History View (User)
-- `FR-14` — Category Management (CRUD)
+EShop backend API.
 
-Pool D / mobile testing is not part of the HW04 automation scope.
+## Tool
 
-Each feature must independently satisfy:
+k6.
 
-- At least 12 automated test cases.
-- Data-driven execution using external CSV or JSON data.
-- At least three distinct assertion patterns across the automation suite.
-- Execution on Chromium.
-- Execution on Firefox.
-- Execution on WebKit.
-- An HTML report for each required browser execution.
+The HW05 specification permits JMeter or k6. k6 is the selected
+performance-testing tool for this submission.
 
-Minimum assignment totals:
+Native k6 raw output is accepted as the raw performance-result format
+when k6 is used.
+
+## Selected End-to-End Workflow
+
+The selected workflow is:
 
 ```text
-3 features
-×
-12 automated cases
-=
-36 automated cases minimum
+POST /api/login
+        ↓
+GET /api/users/me
+        ↓
+PUT /api/users/me
+        ↓
+POST /api/cart
+        ↓
+GET /api/cart
 ```
 
-and:
+## Endpoint Groups
 
-```text
-3 features
-×
-3 browsers
-=
-9 browser executions minimum
-```
+| Endpoint | Group |
+|---|---|
+| `POST /api/login` | Auth-heavy |
+| `GET /api/users/me` | Read-heavy |
+| `PUT /api/users/me` | Transactional |
+| `POST /api/cart` | Transactional |
+| `GET /api/cart` | Read-heavy |
+
+This is the single approved end-to-end workflow for HW05.
+
+Load, Stress, and Spike MUST all execute this same workflow.
+
+Do not create separate endpoint workflows for different scenarios.
 
 ---
 
 # 3. Source-of-Truth Policy
 
-HW04 uses multiple sources of evidence. They have different purposes and
-must not be treated as interchangeable.
+## HW05 Specification
 
-## 3.1 Implemented UI
+`2026.HW05.Performance Testing_En_2.0_TA.md`
 
-Use the implemented UI to determine:
+Defines assignment requirements.
 
-- What the user can actually interact with.
-- User-controllable inputs.
-- Visible validation behavior.
-- Available actions.
-- Navigation behavior.
-- Observable results.
-- Actual selectors/locators required for automation.
+## API Specification
 
-## 3.2 `api_specification.md`
+`api_specification.md`
 
-Use `api_specification.md` to determine:
+Defines documented API methods, paths, parameters, authentication,
+request data, and constraints.
 
-- Related API endpoints.
-- HTTP methods.
-- API-level feature behavior documented by the project.
-- Request/response information provided by the specification.
-- API-supported preconditions and data constraints when documented.
+## Workflow
 
-Do not invent endpoints.
+`WORKFLOW.md`
 
-Do not assume API behavior that is not documented.
+Defines the student's selected workflow, scenario configuration,
+orchestration, and artifacts.
 
-## 3.3 Existing HW02 Artifacts
+## Raw Performance Results
 
-Use existing HW02 artifacts as the baseline for:
+Raw native k6 output is the source of truth for measured performance
+results when k6 is used.
 
-- Domain Testing.
-- Boundary Value Analysis.
-- Existing test cases.
-- Existing expected results.
-- Existing feature understanding.
+## Actual SUT
 
-Do not regenerate HW02 testing artifacts merely to duplicate previous work.
-
-## 3.4 Execution Evidence
-
-Use actual execution evidence to determine:
-
-- Pass/Fail.
-- Actual behavior.
-- Browser-specific behavior.
-- Whether a failure is reproducible.
-- Whether a genuine SUT defect exists.
-
-## 3.5 Conflict Resolution
-
-If sources appear inconsistent:
-
-1. Check the implemented UI.
-2. Check `api_specification.md`.
-3. Check the existing approved HW02 artifacts.
-4. Record the discrepancy.
-5. Stop and request human clarification if the discrepancy affects the
-   expected behavior or test result.
-
-Do not silently choose an interpretation.
+Actual execution is the source of truth for observed SUT behavior.
 
 ---
 
-# 4. Artifact and Folder Rules
+# 4. Stage 1 — Environment Preparation
 
-## 4.1 General Rule
-
-Before executing any skill, inspect the relevant existing artifacts.
-
-Never assume that a folder is empty.
-
-For each feature:
-
-```text
-tests/FR{feature}/
-bugs/FR{feature}/
-```
-
-Existing artifacts must be reused whenever they remain valid.
-
-## 4.2 Recommended HW04 Structure
-
-Use the following structure unless the repository already has an established
-compatible structure:
-
-```text
-tests/
-├── FR01/
-│   ├── testcases/
-│   ├── scripts/
-│   ├── data/
-│   ├── screenshots/
-│   ├── traces/
-│   ├── videos/
-│   ├── logs/
-│   ├── reports/
-│   │   ├── chromium/
-│   │   ├── firefox/
-│   │   └── webkit/
-│   └── execution.md
-│
-├── FR11/
-│   ├── testcases/
-│   ├── scripts/
-│   ├── data/
-│   ├── screenshots/
-│   ├── traces/
-│   ├── videos/
-│   ├── logs/
-│   ├── reports/
-│   │   ├── chromium/
-│   │   ├── firefox/
-│   │   └── webkit/
-│   └── execution.md
-│
-└── FR14/
-    ├── testcases/
-    ├── scripts/
-    ├── data/
-    ├── screenshots/
-    ├── traces/
-    ├── videos/
-    ├── logs/
-    ├── reports/
-    │   ├── chromium/
-    │   ├── firefox/
-    │   └── webkit/
-    └── execution.md
-
-bugs/
-├── FR01/
-├── FR11/
-└── FR14/
-
-REPORT/
-├── HW04_Report.md
-├── HW04_Report.pdf
-├── AI_Audit.md
-├── AI_Audit.pdf
-├── AI_Critique.md
-├── AI_Critique.pdf
-├── README.md
-└── git-log.txt
-```
-
-If the repository already has an established structure, preserve it and adapt
-the workflow to that structure instead of creating duplicate directories.
-
-## 4.3 File Safety
-
-- Do not overwrite an existing file without explicit permission.
-- Do not create duplicate versions such as `final2`, `new`, `latest`, or
-  `fixed-final`.
-- Before modifying an existing artifact, determine whether it is approved.
-- Approved artifacts are immutable unless the human explicitly requests a
-  change.
-- Save generated artifacts in the feature-specific directory.
-- Keep evidence associated with the feature and browser that produced it.
-- Do not mix FR-01, FR-11, and FR-14 execution artifacts.
-- Do not mix Chromium, Firefox, and WebKit reports.
-- Do not place temporary files into the final submission directory.
-- Preserve raw AI audit logs separately from summarized reports.
-
----
-
-# 5. Required Inputs
-
-The workflow requires:
-
-- EShop SUT.
-- `api_specification.md`.
-- Existing HW02 artifacts.
-- Existing HW03/HW04 project structure where applicable.
-- `SKILLS.md`.
-- `FEATURE_INPUT.md` or equivalent feature-input artifacts.
-- Existing test cases under `tests/FR{feature}/`.
-- Existing bugs under `bugs/FR{feature}/`.
-- Required Playwright/Selenium environment.
-- Chromium.
-- Firefox.
-- WebKit.
-- Student ID.
-- Public GitHub repository.
-- Assignment-specific report templates, if provided.
-
-Before starting a feature, inspect the relevant existing files rather than
-recreating them.
-
----
-
-# 6. Stage 0 — Preparation
-
-## Skill
+Use:
 
 `ENV-01`
 
-## Purpose
+## Tasks
 
-Verify that the EShop SUT and automation environment are ready.
-
-## Inputs
-
-- EShop SUT.
-- `api_specification.md`.
-- Existing project artifacts.
-- Existing test artifacts.
-- Automation tooling.
-
-## Required Verification
-
-Verify:
-
-- SUT is available.
-- Web frontend is accessible.
-- `api_specification.md` is available.
-- Automation tooling is available.
-- Required browser engines are available.
-- Required test accounts/state can be prepared.
-- Existing HW02 artifacts can be located.
-- Required feature folders exist or can be created safely.
+1. Start the EShop SUT.
+2. Verify backend API connectivity.
+3. Verify required dependencies.
+4. Verify test accounts.
+5. Verify required test data.
+6. Verify k6 installation.
+7. Verify resource-monitoring tools.
+8. Execute a minimal API smoke request.
 
 ## Output
 
-`Environment Ready` and any required environment evidence.
+Produce:
 
-## Human Review
+- environment verification notes;
+- tool/version information;
+- test-data readiness status;
+- SUT connectivity evidence.
 
-The human must review:
-
-- SUT availability.
-- Tool availability.
-- Browser availability.
-- `api_specification.md` availability.
-- Test-account/state availability.
-- Existing artifact paths.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
-Do not continue until the human explicitly approves the environment.
+→ **Human Review**
 
 ---
 
-# 7. Stage 1 — Recover Existing HW02 Test-Case Definitions
+# 5. Stage 2 — API Validation
 
-This stage does NOT rerun HW02 Domain Testing or Boundary Value Analysis.
+Use:
 
-It also does NOT reuse HW02 execution results as HW04 execution evidence.
+`API-01`
 
-The purpose of this stage is only to recover the existing HW02 test-case definitions/design that will serve as the starting point for HW04 automation.
+Validate the selected workflow against:
 
-For HW04, DT-01, DT-02, DT-03, DT-04, and BVA-01 are NOT executed to recreate HW02 test cases.
+- `api_specification.md`;
+- the actual running SUT.
 
-They remain available only as reusable skill definitions/reference for understanding the methodology.
+Verify:
 
-The existing HW02 DT/BVA artifacts are the starting test-design inputs for HW04.
+- endpoint paths;
+- HTTP methods;
+- authentication;
+- headers;
+- request bodies;
+- parameters;
+- response dependencies;
+- documented constraints;
+- required test data.
 
-## Source Files
+Do not invent undocumented behavior.
 
-For each HW04 feature, inspect the existing HW02 artifacts under:
+## Output
 
-- `tests/FR01/`
-- `tests/FR11/`
-- `tests/FR14/`
+Produce:
 
-Locate the files containing the actual Domain Testing, Boundary Value
-Analysis, and test-case definitions.
+- API validation notes;
+- verified endpoint information;
+- required test-data information;
+- identified constraints;
+- validation evidence.
 
-Do not rely on `README.md` as the test-case source when the detailed
-feature artifacts are available.
-
-## Reuse
-
-Reuse from HW02:
-
-- Test-case IDs.
-- Test-case descriptions.
-- Preconditions.
-- Input/domain partitions.
-- Boundary values.
-- Expected results.
-- Positive/negative/edge-case intent.
-- Relevant feature understanding.
-
-Do NOT reuse from HW02:
-
-- Passed/failed status.
-- Execution counts.
-- Screenshots as HW04 execution evidence.
-- HW02 execution logs.
-- HW02 browser results.
-- HW02 bug status as proof of an HW04 defect.
-- Any other HW02 execution result.
-
-HW04 execution evidence must come from the new HW04 automation runs.
-
-## Required Procedure
-
-1. Locate the detailed FR-01 test-case artifacts in `tests/FR01/`.
-2. Locate the detailed FR-11 test-case artifacts in `tests/FR11/`.
-3. Locate the detailed FR-14 test-case artifacts in `tests/FR14/`.
-4. Extract the existing test-case definitions.
-5. Preserve their original IDs where practical.
-6. Cross-check their feature behavior against:
-   - the implemented UI;
-   - `api_specification.md`;
-   - existing approved HW02 artifacts.
-7. Do not rerun Domain Testing or BVA.
-8. Do not recreate HW02 test cases from scratch unless the detailed source
-   artifact is genuinely missing.
-9. Present the recovered test-case set to the human for review.
-
-## Human Review
-
-The human must verify that:
-
-- The correct HW02 files were identified.
-- The recovered test cases correspond to the intended HW02 work.
-- The test-case definitions are complete enough for HW04 automation.
-- Any inconsistencies with the current SUT or `api_specification.md` are
-  identified.
-- HW02 execution results have not been incorrectly carried into HW04.
-
-### STOP — HUMAN APPROVAL REQUIRED
+→ **Human Review**
 
 ---
 
-# 8. Stage 2 — Prepare Data-Driven Test Data
+# 6. Stage 3 — Test Data Preparation
 
-## Skill
+Use:
 
 `DATA-01`
 
-Execute independently for:
+Prepare external CSV/JSON data required by the selected workflow.
 
-- `FR-01`
-- `FR-11`
-- `FR-14`
-
-Complete one feature and obtain approval before moving to another feature.
-
-## Inputs
-
-- Approved HW02 test cases.
-- Feature UI evidence.
-- `api_specification.md`.
-- Current SUT behavior.
-- Approved automation scope.
-
-## Required Result
-
-For the current feature:
-
-- External CSV or JSON test data.
-- Every selected automated test case has corresponding data.
-- Test logic is separated from test data.
-- No prohibited hardcoded test-data arrays/objects are used.
-
-## Human Review
-
-The human must verify:
-
-- Data corresponds to real UI/API-supported inputs.
-- Data does not contain invented fields.
-- Values are supported by the implemented feature.
-- Negative and edge data are meaningful.
-- Every selected test case maps to a data record.
-- Data is actually externalized.
-- The file is stored under the correct feature folder.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
----
-
-# 9. Stage 3 — Select Automatable Cases
-
-This stage is a human decision supported by the approved test-case artifacts.
-
-For each feature:
-
-```text
-FR-01 → at least 12 automated cases
-FR-11 → at least 12 automated cases
-FR-14 → at least 12 automated cases
-```
-
-## Required Coverage
-
-The selected cases should preserve the existing HW02 test design and include
-appropriate:
-
-- Positive cases.
-- Negative cases.
-- Edge/boundary cases.
-
-## Non-Automated Test Cases
-
-A test case that is not automated must not be silently removed.
-
-For every excluded test case, record:
-
-```text
-| TC ID | Reason Not Automated | Technical Limitation |
-|---|---|---|
-```
-
-The reason must be concrete and based on:
-
-- The actual SUT.
-- Available automation capabilities.
-- Required external resources.
-- Environment limitations.
-- Other verifiable technical constraints.
-
-## Human Review
-
-The human must explicitly approve:
-
-- The ≥12 selected automated cases.
-- The excluded cases.
-- The reason for every exclusion.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
----
-
-# 10. Stage 4 — Generate Automation Scripts
-
-## Skill
-
-`AUTO-01`
-
-Execute independently for:
-
-- `FR-01`
-- `FR-11`
-- `FR-14`
-
-## Inputs
-
-- Approved test cases.
-- Approved external test data.
-- Feature evidence.
-- `api_specification.md`.
-- Current SUT.
-- Automation environment.
-
-## AI-First Requirement
-
-Automation must be generated through a documented AI-assisted process.
-
-AI may assist incrementally with:
-
-- Test structure.
-- Locator selection.
-- Automation implementation.
-- Assertions.
-- Data-driven implementation.
-- Synchronization.
-
-The AI interaction must be recorded by `AUDIT-01`.
-
-## Required Output
-
-For the current feature:
-
-- Automation script(s).
-- Test-case-to-script mapping.
-- External-data usage.
-- Initial AI-generated automation.
-
-## Human Review
-
-The human must inspect:
-
-### Feature correctness
-
-- Correct feature.
-- Correct user role.
-- Correct preconditions.
-- Correct expected results.
-- Correct UI behavior.
-- Correct API assumptions.
-
-### Automation correctness
-
-- Locators.
-- Selectors.
-- Synchronization.
-- Assertions.
-- Test data handling.
-- Test isolation.
-- Authentication/state handling.
-- Browser compatibility.
-- Error handling.
-
-### Evidence correctness
-
-The human must compare generated assumptions against:
-
-- Implemented UI.
-- `api_specification.md`.
-- Approved test cases.
-
-The human must correct any identified problem.
-
-Every meaningful correction must be recorded for later GAP-01 analysis.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
-Do not execute generated automation until the human explicitly approves it.
-
----
-
-# 11. Stage 5 — Validate Assertions
-
-## Skill
-
-`ASSERT-01`
-
-Run after automation generation and initial human review.
-
-## Required Result
-
-The automation suite must contain at least three distinct assertion patterns.
-
-Examples:
-
-- Visibility / existence
-- Text / content
-- URL / navigation
-- Value
-- Attribute
-- Enabled / disabled state
-- Count
-- Checked / selected state
-
-Only assertion patterns that are actually implemented and executed count.
-
-## Human Review
-
-The human must verify:
-
-- Every automated test has meaningful assertions.
-- Assertions correspond to the approved expected result.
-- Negative tests verify the expected negative behavior.
-- Assertions are not merely action-completion checks.
-- At least three distinct assertion patterns exist across the suite.
-- Assertions are based on observable SUT behavior.
-- Assertions are not based on invented implementation details.
-
-The human must correct weak or missing assertions.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
----
-
-# 12. Stage 6 — Execute Approved Automation
-
-## Skill
-
-`EXEC-01`
-
-Execute the approved automation for the current feature.
-
-## Inputs
-
-- Approved script.
-- Approved external test data.
-- Approved assertions.
-- Prepared SUT.
-
-## Required Output
-
-Record:
-
-```text
-| TC ID | Browser | Expected | Actual | Status | Failure Source | Evidence |
-|---|---|---|---|---|---|---|
-```
-
-## Failure Classification
-
-Every failure must be classified before proceeding.
-
-Possible sources:
-
-- SUT defect
-- Automation defect
-- Test-data defect
-- Environment/browser defect
-- Incorrect expected result
-
-A failed automation test is not automatically a SUT bug.
-
-## Human Review
-
-The human must inspect:
-
-- Actual test results.
-- Screenshots.
-- Traces.
-- Logs.
-- Videos where applicable.
-- Failure classification.
-
-The human must verify that the actual result corresponds to the real SUT
-behavior.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
-No browser-matrix execution proceeds until the human approves the execution
-result.
-
----
-
-# 13. Stage 7 — Multi-Browser Execution
-
-## Skill
-
-`BROWSER-01`
-
-For each feature, execute the approved automation suite on:
-
-- Chromium
-- Firefox
-- WebKit
-
-## Required Matrix
-
-```text
-| Feature | Chromium | Firefox | WebKit |
-|---|---|---|---|
-| FR-01 | Required | Required | Required |
-| FR-11 | Required | Required | Required |
-| FR-14 | Required | Required | Required |
-```
-
-Minimum:
-
-```text
-9 browser executions
-```
-
-## Rules
-
-- Do not infer one browser's result from another.
-- Do not claim browser coverage without execution.
-- Use the approved automation logic.
-- Use the approved external test data.
-- Record browser-specific failures separately.
-- Do not silently modify test logic to make one browser pass.
-
-## Human Review
-
-The human must inspect:
-
-- Every browser result.
-- Browser-specific failures.
-- Test counts.
-- Passed/failed counts.
-- Whether all 9 required executions actually occurred.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
----
-
-# 14. Stage 8 — Generate HTML Execution Reports
-
-## Skill
-
-`REPORT-AUTO-01`
-
-Generate the required HTML report for every actual browser execution.
-
-## Required Reports
-
-```text
-FR-01 / Chromium
-FR-01 / Firefox
-FR-01 / WebKit
-
-FR-11 / Chromium
-FR-11 / Firefox
-FR-11 / WebKit
-
-FR-14 / Chromium
-FR-14 / Firefox
-FR-14 / WebKit
-```
-
-## Each Report Must Contain
-
-```text
-Run by: {StudentID}
-```
-
-and an ISO timestamp.
-
-The report must originate from the actual test execution.
-
-## Human Review
-
-The human must verify:
-
-- Report corresponds to the correct feature.
-- Report corresponds to the correct browser.
-- Test results are genuine.
-- Student ID is present.
-- ISO timestamp is present.
-- No execution result has been manually fabricated or altered.
-- Report is stored under the correct feature/browser directory.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
----
-
-# 15. Stage 9 — Analyze Execution Failures
-
-This is a human classification stage.
-
-For every failure:
-
-```text
-Failure
-  ↓
-Automation problem?
- ├── YES → Correct automation
- │
-Test-data problem?
- ├── YES → Correct test data
- │
-Environment/browser problem?
- ├── YES → Correct environment and re-run
- │
-Expected-result problem?
- ├── YES → Review test case
- │
-Genuine SUT defect?
- └── YES → BUG-01
-```
-
-The human must make this classification.
-
-Do not automatically create bugs from failed tests.
-
-If automation, data, environment, or expected-result problems are found, the
-relevant artifact must be corrected through the appropriate reviewed process
-before relying on the resulting execution.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
----
-
-# 16. Stage 10 — Report Genuine SUT Bugs
-
-## Skill
-
-`BUG-01`
-
-Run only for failures verified by the human as genuine SUT defects.
-
-## Inputs
-
-- Failed execution.
-- Approved expected result.
-- Actual result.
-- Screenshots.
-- Trace/log evidence.
-- Browser information.
-- Reproduction information.
-- Relevant UI/API evidence.
-
-## Required Output
-
-For each genuine defect:
-
-```text
-bugs/FR{feature}/
-```
-
-containing the required bug evidence.
-
-Also create or update the corresponding GitHub Issue.
-
-## Required Bug Evidence
-
-- Clear title.
-- Preconditions.
-- Reproduction steps.
-- Expected result.
-- Actual result.
-- Severity.
-- Browser/environment.
-- Screenshot.
-- Relevant execution evidence.
-- GitHub Issue reference.
-
-## Human Review
-
-The human must confirm:
-
-- The issue is reproducible.
-- The issue originates from the SUT.
-- Severity is appropriate.
-- Screenshot is genuine.
-- GitHub Issue corresponds to the defect.
-- Automation/environment failures were not incorrectly reported as bugs.
-- The expected behavior is supported by the UI, `api_specification.md`, or
-  approved test artifacts.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
-If no genuine defect exists, explicitly record that no SUT bug was created.
-
----
-
-# 17. Stage 11 — AI Automation Gap Analysis
-
-## Skill
-
-`GAP-01`
-
-Run after human review and correction of the generated automation.
-
-## Purpose
-
-Document what the AI got wrong, missed, or incorrectly assumed.
-
-## Required Analysis
-
-Consider:
-
-- Missing test cases.
-- Incorrect assumptions.
-- Hallucinated UI elements.
-- Hallucinated API endpoints.
-- Incorrect API assumptions.
-- Missing edge cases.
-- Incorrect expected results.
-- Fragile selectors.
-- Incorrect locators.
-- Weak assertions.
-- Missing assertions.
-- Flaky waits.
-- Incorrect synchronization.
-- Hardcoded test data.
-- Incorrect external-data handling.
-- Browser-specific assumptions.
-- Authentication/state problems.
-
-## Required Output
-
-```text
-| Issue | AI Output | Final Result | Category | Cause | Human Correction |
-|---|---|---|---|---|---|
-```
-
-## Human Review
-
-The human must verify every reported AI gap.
-
-The AI must not be allowed to determine its own mistakes without human
-verification.
-
-Causes must not be presented as facts unless supported by evidence.
-
-The human must compare the AI output against:
-
-- Implemented UI.
-- `api_specification.md`.
-- Approved test cases.
-- Actual execution results.
-
-### STOP — HUMAN APPROVAL REQUIRED
-
----
-
-# 18. Stage 12 — Complete Current Feature
-
-A feature is complete only when all of the following have been approved:
-
-```text
-[ ] Feature evidence verified
-[ ] Existing HW02 test cases reviewed
-[ ] ≥12 automated test cases selected
-[ ] Non-automated cases documented with reasons
-[ ] External CSV/JSON test data approved
-[ ] Automation scripts generated
-[ ] Human corrections completed
-[ ] ≥3 assertion patterns demonstrated
-[ ] Execution completed
-[ ] Chromium completed
-[ ] Firefox completed
-[ ] WebKit completed
-[ ] Required HTML reports generated
-[ ] Failures classified
-[ ] Genuine bugs reported
-[ ] AI Gap Analysis completed
-[ ] Human review completed
-```
-
-### STOP — HUMAN APPROVAL REQUIRED
-
-The human must explicitly approve feature completion.
-
----
-
-# 19. Stage 13 — Repeat for Remaining Features
-
-Repeat Stages 2–18 independently for:
-
-- `FR-01`
-- `FR-11`
-- `FR-14`
-
-Do not mix artifacts between features.
-
-Each feature must independently satisfy the HW04 minimum requirements.
-
----
-
-# 20. Stage 14 — Assignment-Wide Coverage Verification
-
-This is a manual verification stage.
-
-The human must confirm:
-
-```text
-FR-01 ≥ 12 automated cases
-FR-11 ≥ 12 automated cases
-FR-14 ≥ 12 automated cases
-```
-
-Therefore:
-
-```text
-Total ≥ 36 automated cases
-```
-
-The human must also confirm:
-
-```text
-FR-01 → Chromium + Firefox + WebKit
-FR-11 → Chromium + Firefox + WebKit
-FR-14 → Chromium + Firefox + WebKit
-```
-
-Therefore:
-
-```text
-Total ≥ 9 browser executions
-```
+The data must support the intended concurrency and test duration.
 
 Verify:
 
+- credentials;
+- product/test data;
+- profile data;
+- stateful data requirements;
+- reset/reuse requirements.
+
+Do not commit secrets.
+
+→ **Human Review**
+
+---
+
+# 7. Stage 4 — Baseline Workflow Validation
+
+Before Load/Stress/Spike testing, implement and execute a low-load
+baseline of the complete workflow:
+
 ```text
-[ ] External CSV/JSON test data is used.
-[ ] No prohibited inline test data exists.
-[ ] At least 3 distinct assertion patterns are present.
-[ ] HTML reports exist for all required executions.
-[ ] Reports contain Student ID.
-[ ] Reports contain ISO timestamps.
-[ ] Non-automated cases have documented reasons.
-[ ] Genuine bugs have evidence.
-[ ] GitHub Issues exist for genuine bugs.
-[ ] AI Gap Analysis is complete.
+POST /api/login
+        ↓
+GET /api/users/me
+        ↓
+PUT /api/users/me
+        ↓
+POST /api/cart
+        ↓
+GET /api/cart
 ```
 
-### STOP — HUMAN APPROVAL REQUIRED
+Use:
+
+`K6-01`
+
+The baseline validates that the complete workflow can execute correctly
+before concurrency is increased.
+
+Record:
+
+- HTTP results;
+- checks;
+- errors;
+- response times;
+- required state transitions.
+
+Do not use baseline results as fabricated performance thresholds.
+
+→ **Human Review**
 
 ---
 
-# 21. Stage 15 — AI Audit
+# 8. Stage 5 — Performance Scenario Design
 
-## Skill
+Use:
 
-`AUDIT-01`
+`PERF-01`
 
-The AI Audit records every AI interaction used throughout HW04.
+Create three separate performance scenarios:
 
-The audit must include:
+```text
+Load
+Stress
+Spike
+```
 
-- AI tool.
-- Date/time.
-- Exact prompt.
-- AI output.
-- Human review.
-- Human changes.
-- Generated artifacts.
+All three MUST use the same approved end-to-end workflow.
 
-Raw AI interaction logs must be preserved separately.
+Only workload characteristics change.
 
-## Human Review
+## Load
 
-The human must verify:
+Measure behavior under expected sustained workload.
 
-- Every AI interaction has been recorded.
-- Exact prompts are preserved.
-- AI outputs are preserved.
-- Failed and corrected interactions are not omitted.
-- Human corrections are recorded.
-- Timestamps are accurate.
-- No fabricated AI interactions exist.
+## Stress
 
-### STOP — HUMAN APPROVAL REQUIRED
+Increase workload progressively to identify degradation or instability.
+
+## Spike
+
+Introduce an abrupt workload increase and observe degradation and recovery.
+
+For each scenario define and justify:
+
+- virtual users/concurrency;
+- ramp-up/ramp-down;
+- duration;
+- pacing/think time;
+- thresholds;
+- success/failure criteria;
+- scenario objective.
+
+Do not copy arbitrary values without justification.
+
+Parameters must be reviewed and approved by the student.
+
+→ **Human Review after each scenario design**
 
 ---
 
-# 22. Stage 16 — Human AI Critique
+# 9. Stage 6 — k6 Test Generation
 
-This stage is **manual**.
+Use:
 
-No Agent Skill is required.
+`K6-01`
 
-The human writes the mandatory AI Critique.
+Generate the three performance test plans using:
+
+- the approved workflow;
+- validated API information;
+- approved test data;
+- approved scenario configurations.
+
+## Test Plan Names
+
+Use:
+
+```text
+<StudentID>_Load_<YYYYMMDD>
+<StudentID>_Stress_<YYYYMMDD>
+<StudentID>_Spike_<YYYYMMDD>
+```
+
+Use appropriate k6 script/output extensions.
 
 ## Requirements
 
-The critique must:
+Each test plan must:
 
-- Be 200–300 words.
-- Be based on actual AI interactions.
-- Be based on documented AI gaps/corrections.
-- Address actual AI performance during HW04.
+- use the approved end-to-end workflow;
+- use external test data;
+- handle authentication correctly;
+- preserve request dependencies;
+- implement approved checks;
+- implement approved thresholds;
+- use a configurable SUT base URL;
+- avoid hardcoded credentials;
+- avoid fabricated API behavior.
 
-It must address:
-
-1. Where AI was wrong, biased, or incomplete.
-2. Why AI failed to catch the problem.
-3. What principle was learned about collaborating with AI.
-
-## Output
-
-```text
-REPORT/AI_Critique.md
-REPORT/AI_Critique.pdf
-```
-
-## Human Review
-
-The human verifies:
-
-- Word count is 200–300 words.
-- Claims correspond to the AI Audit/GAP evidence.
-- A concrete AI problem is discussed.
-- The reason for the AI failure is discussed.
-- A lesson about AI collaboration is stated.
-
-### STOP
-
-Do not proceed until the human confirms the critique is complete.
+→ **Human Review**
 
 ---
 
-# 23. Stage 17 — Git History Verification
+# 10. Stage 7 — Check and Threshold Review
 
-## Skill
+Use:
+
+`CHECK-01`
+
+Review:
+
+- HTTP checks;
+- functional checks;
+- response-time metrics;
+- throughput/RPS;
+- p95/p99 latency where applicable;
+- error rate;
+- scenario-specific performance thresholds;
+- regression criteria.
+
+Do not invent threshold values.
+
+All thresholds must be human-approved.
+
+→ **Human Review**
+
+---
+
+# 11. Stage 8 — Load / Stress / Spike Execution
+
+Use:
+
+`EXEC-01`
+
+Execute all three approved scenarios.
+
+For each scenario:
+
+1. Verify SUT readiness.
+2. Verify test data.
+3. Verify scenario configuration.
+4. Start resource monitoring.
+5. Execute k6.
+6. Preserve raw native k6 output.
+7. Record execution metadata.
+8. Capture required evidence. 
+
+→ **Human Review after each execution**
+
+---
+
+# 12. Stage 9 — Evidence Collection
+
+Use:
+
+`EVIDENCE-01`
+
+For each Load, Stress, and Spike execution, capture a screenshot showing:
+
+- the k6 performance-test execution/result;
+- the backend process resource usage;
+- CPU usage;
+- memory usage;
+- the scenario being executed.
+
+The performance-testing tool and resource monitor must be visible together.
+
+Use an appropriate resource-monitoring tool for the SUT environment.
+For a backend running in WSL Ubuntu, `htop` or an equivalent Linux process
+monitor may be used. Windows Task Manager may also be used for host-level
+resource evidence.
+
+For each scenario, also preserve:
+
+- scenario configuration;
+- raw native k6 output;
+- processed results;
+- execution timestamp.
+
+## Hardware Report
+
+Produce a hardware report containing:
+
+1. A hardware-information screenshot using `dxdiag`, `screenfetch`,
+   or an equivalent system-information tool.
+2. A hardware specification table containing the relevant test-machine
+   specifications.
+
+The specification table should include, where applicable:
+
+- CPU model;
+- CPU core/thread count;
+- RAM capacity;
+- operating system;
+- WSL/Ubuntu version;
+- storage information relevant to the test environment;
+- GPU model where applicable;
+- other hardware information required by HW05.
+
+The hardware report must describe the machine on which the performance
+tests were actually executed.
+
+Do not fabricate hardware specifications.
+
+Do not use hardware information from a different machine.
+
+Do not modify hardware information to make performance results appear
+better or worse.
+
+Do not create a separate hardware report for every scenario; one
+hardware report may be referenced by the Load, Stress, Spike, and
+Endurance results when the same test machine is used.
+
+---
+
+# 13. Stage 10 — Result Processing
+
+Use:
+
+`RESULT-01`
+
+Process raw k6 results while preserving the original raw output unchanged.
+
+Collect, where available:
+
+- request count;
+- throughput/RPS;
+- response-time distribution;
+- p50;
+- p90;
+- p95;
+- p99;
+- error rate;
+- checks;
+- iteration duration;
+- HTTP failures.
+
+Do not replace percentile metrics with averages.
+
+Keep derived metrics separate from raw results.
+
+→ **Human Review**
+
+---
+
+# 14. Stage 11 — Endurance / Soak Test
+
+Use:
+
+`ENDURANCE-01`
+
+Run a short endurance/soak test of approximately 10–15 minutes at
+sustained load, following the HW05 requirement.
+
+Use a sustained workload selected from the Load/Stress evidence.
+
+Measure:
+
+- throughput;
+- latency;
+- p95/p99;
+- errors;
+- CPU;
+- memory.
+
+Determine the maximum empirically stable operating point on the
+student's hardware.
+
+Report concrete numbers, such as:
+
+- maximum stable RPS;
+- relevant latency;
+- memory ceiling;
+- CPU behavior.
+
+Do not claim a threshold without execution evidence.
+
+→ **Human Review**
+
+---
+
+# 15. Stage 12 — AI Performance Analysis
+
+Use:
+
+`ANALYSIS-01`
+
+After collecting raw results, use AI to analyze:
+
+- Load;
+- Stress;
+- Spike;
+- Endurance.
+
+Ask AI to interpret:
+
+- throughput;
+- latency;
+- percentiles;
+- errors;
+- degradation;
+- resource usage;
+- candidate performance thresholds.
+
+Preserve the complete AI output.
+
+AI analysis is advisory and must be reviewed by the student.
+
+→ **Human Review**
+
+---
+
+# 16. Stage 13 — AI Misinterpretation Hunt
+
+Use:
+
+`GAP-01`
+
+Compare the AI analysis against the raw k6 results.
+
+For every confirmed AI mistake, record:
+
+| Issue | AI Claim | Correct Result | Evidence | Error Type | Human Correction |
+|---|---|---|---|---|---|
+
+Focus on:
+
+- incorrect metric values;
+- percentile mistakes;
+- average/percentile confusion;
+- throughput interpretation;
+- error-rate interpretation;
+- unsupported causal claims;
+- incorrect thresholds;
+- missed important observations.
+
+Every correction must be supported by raw execution evidence.
+
+→ **Human Review**
+
+---
+
+# 17. Stage 14 — AI Optimization Review
+
+Use:
+
+`OPT-01`
+
+Ask AI to propose performance optimizations.
+
+For every recommendation classify it as:
+
+- Feasible;
+- Infeasible;
+- Hallucinated;
+- Requires additional evidence.
+
+Provide human reasoning and supporting evidence.
+
+Do not claim an optimization was implemented unless it was actually
+implemented and verified.
+
+→ **Human Review**
+
+---
+
+# 18. Stage 15 — Continuous Performance Testing Proposal
+
+Use:
+
+`CI-01`
+
+Design a CI/CD model that:
+
+1. Watches relevant SUT commits.
+2. Determines whether performance testing should run.
+3. Executes the appropriate performance test.
+4. Compares results with a baseline.
+5. Detects p95 regression.
+6. Flags regression for review.
+
+Include:
+
+- flow chart;
+- trigger logic;
+- baseline strategy;
+- p95 regression criteria;
+- cost trade-offs;
+- false-positive trade-offs.
+
+This is a proposal unless actually implemented.
+
+Do not claim that the CI/CD pipeline exists unless it has actually
+been implemented and executed.
+
+→ **Human Review**
+
+---
+
+# 19. Stage 16 — Bug and Performance Issue Reporting
+
+Use:
+
+`BUG-01`
+
+if genuine SUT issues are discovered.
+
+Report genuine:
+
+- HTTP errors;
+- crashes;
+- functional regressions;
+- severe latency degradation;
+- reproducible performance issues.
+
+Create GitHub Issues with screenshots when required.
+
+Do not classify environment, configuration, network, or tool failures
+as SUT bugs without evidence.
+
+If no genuine issue is discovered, explicitly report that no confirmed
+SUT bug/performance issue was found.
+
+---
+
+# 20. Stage 17 — AI Audit
+
+Use:
+
+`AUDIT-01`
+
+Maintain the complete AI Audit throughout the assignment.
+
+For every significant AI interaction record:
+
+- AI tool;
+- date and time;
+- prompt;
+- AI output.
+
+Also preserve relevant:
+
+- human review;
+- corrections;
+- rejected recommendations;
+- final decisions.
+
+The final AI Audit Report is mandatory.
+
+---
+
+# 21. Stage 18 — AI Critique
+
+Produce the mandatory 200–300 word AI Critique.
+
+Address:
+
+1. Where AI was wrong, biased, or incomplete.
+2. Why AI failed to catch the issue.
+3. What principle was learned about collaborating with AI.
+
+This is a human-written critique based on the actual AI-assisted work.
+
+---
+
+# 22. Stage 19 — Git Commit Log
+
+Use:
 
 `GIT-01`
 
-## Required Repository Conditions
+Create meaningful Git commits for major workflow stages, including:
 
-The GitHub repository must be public.
+- performance-test setup;
+- test-data preparation;
+- API workflow;
+- Load plan;
+- Stress plan;
+- Spike plan;
+- execution/results;
+- AI analysis;
+- continuous-performance proposal;
+- report.
 
-At least:
+Provide the Git commit log as a text file.
 
-```text
-8 meaningful commits
-```
-
-must modify automation test-script files.
-
-Commits that only modify:
-
-- README.
-- PDF.
-- Report.
-- Screenshots.
-- Other documentation.
-
-do not count toward the 8-commit requirement.
-
-## Output
-
-```text
-REPORT/git-log.txt
-```
-
-## Human Review
-
-The human must verify:
-
-- Repository is public.
-- At least 8 qualifying commits exist.
-- Qualifying commits actually modify test scripts.
-- Commit history represents genuine development.
-- Git log corresponds to the submitted repository.
-
-### STOP — HUMAN APPROVAL REQUIRED
+Do not fabricate commits or rewrite history merely to satisfy the
+assignment.
 
 ---
 
-# 24. Stage 18 — README and Self-Assessment
+# 23. Stage 20 — Human Demonstration
 
-This stage is primarily manual/documentation work.
+This stage is HUMAN-ONLY.
 
-The README must contain the required HW04 summary and self-assessment.
+Do not use an AI skill to perform the demonstration.
 
-## Required Test Summary
+Record the required unlisted YouTube demonstration:
 
-```text
-| Metric | Value |
-|---|---:|
-| Features | 3 |
-| Test cases automated | ≥36 |
-| Test cases executed | Actual value |
-| Passed | Actual value |
-| Failed | Actual value |
-| Browser runs | ≥9 |
-| Bugs | Actual value |
-| Demo video | YouTube URL |
-```
+- at least 6 minutes total;
+- own Vietnamese voice narration;
+- performance-testing tool visible;
+- resource monitor visible in the same frame;
+- actual performance-testing execution shown.
 
-## Required Self-Assessment
+The video may be split into one clip per scenario if necessary.
 
-```text
-| No. | Criteria | Grade | Self-Assessed Grade |
-|---|---|---:|---:|
-| 1 | Task 1 - Feature A | 25 | |
-| 1 | Task 1 - Feature B | 25 | |
-| 1 | Task 1 - Feature C | 25 | |
-| 2 | Task 2 — Demo video | 15 | |
-| 3 | Agent Skills | 10 | |
-| | Total | 100 | |
-```
-
-## Human Review
-
-The human must verify:
-
-- Counts match actual artifacts.
-- Browser-run count matches actual reports.
-- Bug count matches actual bug reports.
-- Demo link is correct.
-- Self-assessment is within the allowed grading range.
-- No fabricated metrics exist.
-
-### STOP — HUMAN APPROVAL REQUIRED
+Add the video link to the report and README.
 
 ---
 
-# 25. Stage 19 — Final Report
+# 24. Stage 21 — Final Report
 
-## Skill
+Use:
 
 `REPORT-01`
 
-Execute only after all feature-level artifacts and assignment-wide
-verification have been approved.
+The final report must contain the approved:
 
-## Inputs
+- selected workflow;
+- endpoint-group classification;
+- Load plan and results;
+- Stress plan and results;
+- Spike plan and results;
+- endurance test and threshold;
+- performance metrics;
+- AI performance analysis;
+- AI misinterpretation hunt;
+- AI optimization review;
+- continuous-performance proposal;
+- bugs/performance issues;
+- evidence;
+- AI Critique;
+- AI Audit information.
 
-- Approved FR-01 artifacts.
-- Approved FR-11 artifacts.
-- Approved FR-14 artifacts.
-- Automation scripts.
-- External test data.
-- Assertion evidence.
-- Execution results.
-- Multi-browser results.
-- HTML reports.
-- Bug reports.
-- Non-automated test-case records.
-- AI Gap Analysis.
-- AI Audit.
-- Human AI Critique.
-- Git log.
-- README.
-- Demo video URL.
+Distinguish clearly between:
 
-## Required Final Report Contents
+- measured results;
+- AI interpretation;
+- human correction;
+- human conclusions.
 
-The final report must document:
+Do not present AI-generated values as measured values.
 
-1. Selected features.
-2. Existing HW02 test-case basis.
-3. Feature evidence and relevant API specification usage.
-4. Automated test cases.
-5. Data-driven test data.
-6. Automation implementation.
-7. Assertion patterns.
-8. Human review and corrections.
-9. Multi-browser execution.
-10. HTML report evidence.
-11. Execution results.
-12. Genuine bugs.
-13. Non-automated test cases and reasons.
-14. AI Gap Analysis.
-15. AI Audit.
-16. AI Critique.
-17. GitHub repository.
-18. Git commit log.
-19. Demo video.
-
-## Human Review
-
-The human must review the entire final report for:
-
-- Factual correctness.
-- Consistency with actual artifacts.
-- Correct test counts.
-- Correct browser counts.
-- Correct bug counts.
-- Correct API references.
-- Correct links.
-- Correct file references.
-- No fabricated evidence.
-- No unapproved AI-generated content.
-
-### STOP — HUMAN APPROVAL REQUIRED
+→ **Final Human Review**
 
 ---
 
-# 26. Stage 20 — Demo Video
+# 25. Stage 22 — README
 
-This stage is **manual**.
+Use:
 
-No Agent Skill is required.
+`README-01`
 
-The human creates the required unlisted YouTube demonstration.
+The README must include:
 
-## Required Content
-
-The video must:
-
-- Be at least 5 minutes.
-- Use Vietnamese narration.
-- Demonstrate one automation script end to end.
-- Demonstrate multi-browser execution.
-- Show the generated HTML report.
-- Explain at least one human fix to AI-generated automation.
-- Show authorship evidence using either:
-  - face-cam, or
-  - `whoami` and `hostname` in the terminal.
-- Demonstrate the Agent Skill where required by the assignment.
-
-## Human Review
-
-Before submission, verify the uploaded video against every requirement.
-
-### STOP — HUMAN APPROVAL REQUIRED
+- self-assessment table;
+- test summary;
+- scenarios executed;
+- endpoint groups covered;
+- selected workflow;
+- endurance threshold with concrete numbers;
+- number of confirmed bugs/performance issues;
+- demo video link;
+- reproduction instructions;
+- relevant artifact locations.
 
 ---
 
-# 27. Stage 21 — Final Submission Verification
+# 26. Final Submission Checklist
 
-This stage is manual.
+Before submission verify:
 
-Do not submit until every required artifact has been checked.
-
-## Feature Requirements
-
-```text
-[ ] FR-01 has ≥12 automated cases
-[ ] FR-11 has ≥12 automated cases
-[ ] FR-14 has ≥12 automated cases
-[ ] ≥36 automated cases total
-
-[ ] External CSV/JSON data is used
-[ ] No prohibited inline test data
-[ ] ≥3 assertion patterns
-```
-
-## Browser Requirements
-
-```text
-[ ] FR-01 Chromium
-[ ] FR-01 Firefox
-[ ] FR-01 WebKit
-
-[ ] FR-11 Chromium
-[ ] FR-11 Firefox
-[ ] FR-11 WebKit
-
-[ ] FR-14 Chromium
-[ ] FR-14 Firefox
-[ ] FR-14 WebKit
-
-[ ] ≥9 browser executions total
-```
-
-## Evidence Requirements
-
-```text
-[ ] HTML report for every required browser execution
-[ ] "Run by: {StudentID}" present
-[ ] ISO timestamp present
-[ ] Screenshots/traces/logs available where required
-[ ] Genuine bugs documented
-[ ] GitHub Issues created for genuine bugs
-[ ] Bug screenshots attached
-[ ] Non-automated test cases documented with reasons
-```
-
-## AI Requirements
-
-```text
-[ ] AI Audit complete
-[ ] Exact prompts preserved
-[ ] AI outputs preserved
-[ ] Human corrections recorded
-[ ] AI Gap Analysis complete
-[ ] AI Critique complete
-[ ] AI Critique is 200–300 words
-```
-
-## Repository Requirements
-
-```text
-[ ] Public GitHub repository
-[ ] ≥8 qualifying automation-script commits
-[ ] Git log exported
-```
-
-## Documentation Requirements
-
-```text
-[ ] Final Report Markdown
-[ ] Final Report PDF
-[ ] AI Audit Markdown
-[ ] AI Audit PDF
-[ ] AI Critique Markdown
-[ ] AI Critique PDF
-[ ] README
-[ ] Test summary
-[ ] Self-assessment
-[ ] Demo video URL
-```
-
-## File and Folder Verification
-
-The human must verify:
-
-```text
-[ ] Every referenced file exists.
-[ ] Every report path is valid.
-[ ] Every screenshot/trace/log referenced by a report exists.
-[ ] Every browser report is stored under the correct feature/browser folder.
-[ ] FR-01 artifacts are not mixed with FR-11 or FR-14.
-[ ] Temporary files are removed from the submission package.
-[ ] No obsolete HW03-only artifacts are presented as HW04 evidence.
-[ ] No duplicate or ambiguous "final" files exist.
-[ ] Raw AI audit logs are preserved.
-```
-
-### STOP — HUMAN APPROVAL REQUIRED
+- [ ] Main report Markdown
+- [ ] Main report PDF
+- [ ] Public GitHub repository link
+- [ ] Load test plan
+- [ ] Stress test plan
+- [ ] Spike test plan
+- [ ] Raw native k6 Load result
+- [ ] Raw native k6 Stress result
+- [ ] Raw native k6 Spike result
+- [ ] Required distinct k6 result/report views
+- [ ] Resource-monitor screenshots
+- [ ] Hardware-spec evidence
+- [ ] Endurance results
+- [ ] Concrete endurance threshold
+- [ ] Unlisted YouTube demo link
+- [ ] AI Critique
+- [ ] AI Audit Report
+- [ ] Git commit log
+- [ ] Bug/performance issue report if applicable
+- [ ] README with self-assessment
+- [ ] README test summary
+- [ ] All required supporting materials
 
 ---
 
-# 28. Final Submission Package
-
-The final submission package should preserve the repository's established
-structure while containing all required HW04 artifacts.
-
-Recommended structure:
+# 27. Artifact Dependency
 
 ```text
-<StudentID>_HW04_AI_Automation_<SelfAssessedGrade>/
-│
-├── tests/
-│   ├── FR01/
-│   ├── FR11/
-│   └── FR14/
-│
-├── bugs/
-│   ├── FR01/
-│   ├── FR11/
-│   └── FR14/
-│
-├── REPORT/
-│   ├── HW04_Report.md
-│   ├── HW04_Report.pdf
-│   ├── AI_Audit.md
-│   ├── AI_Audit.pdf
-│   ├── AI_Critique.md
-│   ├── AI_Critique.pdf
-│   ├── README.md
-│   └── git-log.txt
-│
-└── README.md
-```
-
-If the actual repository uses a different established structure, preserve that
-structure instead of creating duplicate artifacts.
-
-Before packaging:
-
-- Verify every referenced file exists.
-- Verify every report link/path is valid.
-- Verify screenshots and traces are present where required.
-- Verify browser reports are present.
-- Verify the Git log is present.
-- Verify the README is present.
-- Verify no temporary files are included.
-- Verify no unrelated HW03 mobile/usability artifacts are incorrectly presented
-  as HW04 automation evidence.
-
-### STOP
-
-Only the human may authorize final submission.
-
----
-
-# 29. Workflow Summary
-
-The complete HW04 workflow is:
-
-```text
-ENV-01
-   ↓
-HUMAN REVIEW
-   ↓
-Feature Evidence + Existing HW02 Test-Case Baseline
-   ↓
-HUMAN APPROVAL
-   ↓
-DATA-01
-   ↓
-HUMAN REVIEW
-   ↓
-Manual Selection of ≥12 Automatable Cases
-   ↓
-HUMAN APPROVAL
-   ↓
-AUTO-01
-   ↓
-HUMAN REVIEW + HUMAN CORRECTION
-   ↓
-ASSERT-01
-   ↓
-HUMAN REVIEW + HUMAN CORRECTION
-   ↓
-EXEC-01
-   ↓
-HUMAN REVIEW
-   ↓
-BROWSER-01
-   ↓
-HUMAN REVIEW
-   ↓
-REPORT-AUTO-01
-   ↓
-HUMAN REVIEW
-   ↓
-Failure Classification
-   ├── Automation/Data/Environment/Expectation
-   │       ↓
-   │    Correct + Review + Re-run
-   │
-   └── Genuine SUT Defect
-           ↓
-         BUG-01
-           ↓
-        HUMAN REVIEW
-   ↓
-GAP-01
-   ↓
-HUMAN REVIEW
-   ↓
-Repeat for FR-01 / FR-11 / FR-14
-   ↓
-Assignment-Wide Coverage Verification
-   ↓
-HUMAN APPROVAL
-   ↓
-AUDIT-01
-   ↓
-HUMAN REVIEW
-   ↓
-Human AI Critique
-   ↓
-HUMAN REVIEW
-   ↓
-GIT-01
-   ↓
-HUMAN REVIEW
-   ↓
-Human README / Self-Assessment
-   ↓
-HUMAN REVIEW
-   ↓
-REPORT-01
-   ↓
-HUMAN REVIEW
-   ↓
-Human Demo Video
-   ↓
-HUMAN REVIEW
-   ↓
-Final Submission Verification
-   ↓
-HUMAN APPROVAL
-   ↓
-SUBMIT
+HW05 Specification
+        ↓
+API Specification
+        ↓
+Environment
+        ↓
+API Validation
+        ↓
+Test Data
+        ↓
+Baseline Workflow
+        ↓
+Load / Stress / Spike Design
+        ↓
+k6 Test Plans
+        ↓
+Human Review
+        ↓
+Load / Stress / Spike Execution
+        ↓
+Raw Results + Evidence
+        ↓
+Endurance Test
+        ↓
+AI Performance Analysis
+        ↓
+AI Misinterpretation Hunt
+        ↓
+AI Optimization Review
+        ↓
+Continuous Performance Proposal
+        ↓
+AI Audit + AI Critique
+        ↓
+Git Commit Log
+        ↓
+Report + README
+        ↓
+Final Human Review
+        ↓
+Submission
 ```
 
 ---
 
-# 30. Non-Negotiable Rules
+# 28. Stop Conditions
 
-1. **One skill at a time.**
-2. **One requested artifact at a time.**
-3. **Human review after every skill.**
-4. **No automatic continuation.**
-5. **No fabricated evidence.**
-6. **No silent overwriting of files.**
-7. **Reuse existing HW02 artifacts whenever valid.**
-8. **Do not regenerate existing work without a reason.**
-9. **FR-01, FR-11, and FR-14 are the HW04 feature scope.**
-10. **Each feature requires ≥12 automated cases.**
-11. **External CSV/JSON test data is mandatory.**
-12. **At least three distinct assertion patterns are mandatory.**
-13. **Every feature must run on Chromium, Firefox, and WebKit.**
-14. **Every required browser execution needs an HTML report.**
-15. **Every genuine SUT defect requires evidence and a GitHub Issue.**
-16. **Non-automated test cases must have documented reasons.**
-17. **Every AI interaction must be auditable.**
-18. **AI output must be preserved, not merely summarized.**
-19. **The implemented UI and `api_specification.md` are the primary feature
-    evidence sources.**
-20. **The student makes the final testing decision.**
-21. **`WORKFLOW.md` controls orchestration; `SKILLS.md` defines skills.**
-22. **The demo video and AI Critique remain human-created deliverables and are
-    not Agent Skills.**
-23. **Only real execution may produce execution evidence.**
+Stop and request human input when:
+
+- HW05 requirements are unclear;
+- API behavior cannot be established;
+- required test data is unavailable;
+- the selected workflow cannot execute;
+- an AI-generated plan conflicts with the HW05 specification;
+- a threshold cannot be justified;
+- execution evidence is missing;
+- raw results are missing or corrupted;
+- a proposed optimization requires unsupported assumptions;
+- an environment failure prevents valid performance measurement.
+
+Never silently substitute another workflow.
+
+Never fabricate missing evidence.
+
+Never fabricate performance results.
+
+---
+
+# 29. Workflow Separation Rule
+
+`SKILLS.md` defines reusable capabilities.
+
+`WORKFLOW.md` defines this student's HW05 workflow and orchestration.
+
+Therefore:
+
+- Do not move the selected endpoints into `SKILLS.md`.
+- Do not move the selected endpoint-group classification into `SKILLS.md`.
+- Do not move scenario-specific VU/concurrency values into `SKILLS.md`.
+- Do not move scenario-specific durations into `SKILLS.md`.
+- Do not move scenario-specific thresholds into `SKILLS.md`.
+- Do not hardcode this student's workflow into reusable skills.
+
+The reusable skills must consume the approved information supplied by
+this workflow.
